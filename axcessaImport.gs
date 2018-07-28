@@ -36,11 +36,12 @@ function axcessa() {
   var primary=ss.getSheetByName("Team Jeff");
   var dates=primary.getRange(2,1,1,primary.getLastColumn()).getDisplayValues();var sheet_name="";var col=0;
   var teams=viewTeams();
-  var rows, sheet, range, row, formulas, cas;
-  var cols=[];
+  var rows, sheet, range, row, formulas, cas, accValue;
+  var cols=[];var acc=[];
   for(var i=1;i<allValues.length;i++){
     for(var j=0;j<allValues[i][0].length;j++){
-      if(allValues[i][0][j]=="Product"){cols[i-1]=j;j=allValues[i][0].length;}
+      if(allValues[i][0][j]=="Acc"){acc[i-1]=j;}
+      else if(allValues[i][0][j]=="Product"){cols[i-1]=j;j=allValues[i][0].length;}
     }
   }
   ss.getSheetByName("1v1").hideSheet();
@@ -55,6 +56,7 @@ function axcessa() {
     range=sheet.getRange(1,col,sheet.getLastRow(),1).getValues();
     formulas=sheet.getRange(1,col,sheet.getLastRow(),1).getFormulas();
     for(var j=0;j<rows.length;j++){
+      accValue=0;
       found=false;
       row=parseInt(rows[j])+20;
       for(var k=0;k<values1.length && !found;k++){
@@ -77,6 +79,7 @@ function axcessa() {
             Logger.log("Found "+cas[j]+" in 2 "+values2[k][cols[0]]+" "+values2[k][cols[0]+1]);
             range[row][0]=Math.round(values2[k][cols[0]]);row++;
             range[row][0]=Math.round(values2[k][cols[0]+1]);row++;
+            accValue+=Math.round(parseInt(values2[k][acc[0]]));
             found=true;
           }
         }
@@ -90,11 +93,14 @@ function axcessa() {
             Logger.log("Found "+cas[j]+" in 3 "+values3[k][cols[1]]+" "+values3[k][cols[2]+1]);
             range[row][0]=Math.round(values3[k][cols[1]]);row++;
             range[row][0]=Math.round(values3[k][cols[1]+1]);row++;
+            accValue+=Math.round(parseInt(values3[k][acc[1]]));
             found=true;
           }
         }
       }
       if(!found){Logger.log(cas[j]+" wasn't found in "+target3.getSheetName());range[row][0]=0;row++;range[row][0]=0;row++;}
+      Logger.log("Adding accValue '"+accValue+"' to range at row "+row);
+      range[row][0]=accValue;row++;
     }
     for(j=0;j<formulas.length;j++){
       if(formulas[j][0]!=""){range[j][0]=formulas[j][0];}

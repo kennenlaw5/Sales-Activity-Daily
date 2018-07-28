@@ -19,7 +19,7 @@ function score1v1(){
     sheet = ss.getSheetByName(sheet_name);
     rows=teamRows(sheet_name);
     for(var i in rows){
-      row=parseInt(rows[i])+28;
+      row=parseInt(rows[i])+30;
       range=sheet.getRange(row,3,3,parseInt(days)).getValues();
       for(var n in range[0]){range[0][n]=range[0][n].toLowerCase();}
       for(var n in range[1]){range[1][n]=range[1][n].toLowerCase();}
@@ -42,12 +42,6 @@ function score1v1(){
   //return(off+" "+check+" "+rows.length);
 }
 function refresh1v1(){
-  /*var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var range = ss.getSheetByName("1v1").getRange("A5:A8");
-  range.setValue('');
-  range.getValues();
-  range.setValues([["Team Jeff"],["Team Anna"],["Team Robb"],["Team MER"]]);*/
-  //UPDATED TO ONLY USE MAIN FUNCTION
   score1v1();
 }
   

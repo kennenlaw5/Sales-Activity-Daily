@@ -2,17 +2,17 @@ function teamRows(sheet_name) {
   //Created By Kennen Larence
   var rows;
   if(sheet_name=="Team Jeff"){
-      return rows=[3,36,69,102,135,168,201];
+      return rows=[3,37,71,105,139,173,207];
     }else if(sheet_name=="Team Ben"){
-      return rows=[3,36,69,102,135,168];
+      return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Robb"){
-      return rows=[3,36,69,102,135,168];
+      return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Anna"){
-      return rows=[3,36,69,102,135,168,201];
+      return rows=[3,37,71,105,139,173,207];
     }else if(sheet_name=="Team Seth"){
-      return rows=[3,36,69,102,135,168];
+      return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Dean"){
-      return rows=[3,36,69];
+      return rows=[3,37,71];
     }
 }
 function teamNames(sheet_name) {
