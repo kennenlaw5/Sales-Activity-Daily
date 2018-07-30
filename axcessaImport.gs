@@ -2,13 +2,15 @@ function axcessa() {
   //Created By Kennen Larence
   //Version 1.0
   var ss=SpreadsheetApp.getActiveSpreadsheet();
-  var ui = SpreadsheetApp.getUi();
+  var ui = SpreadsheetApp.getUi(); ui.alert("Please don't touch!", 'Changes are actively being made. Please do not use or edit this function!', ui.ButtonSet.OK);return;
   var found=false;
   var target1=ss.getSheetByName("Performance");
   var target2=ss.getSheetByName("Report");
   var target3=ss.getSheetByName("Report (1)");
-  var sheets=[target1,target2,target3];var temp;var check=[];
-  if(target2==null||target1==null||target3==null){ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK); return;}
+  var target4=ss.getSheetByName("Report (2)");
+  var target5=ss.getSheetByName("Report (3)");
+  var sheets=[target1,target2,target3,target4,target5];var temp;var check=[];
+  if(target2==null||target1==null||target3==null||target4==null||target5==null){ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK); return;}
   ss.setActiveSheet(target2);
   SpreadsheetApp.flush();
   while(!found){
