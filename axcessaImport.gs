@@ -2,43 +2,23 @@ function axcessa() {
   //Created By Kennen Larence
   //Version 1.0
   var ss=SpreadsheetApp.getActiveSpreadsheet();
-  var ui = SpreadsheetApp.getUi(); ui.alert("Please don't touch!", 'Changes are actively being made. Please do not use or edit this function!', ui.ButtonSet.OK);return;
+  var ui = SpreadsheetApp.getUi(); 
   var found=false;
   var target1=ss.getSheetByName("Performance");
   var target2=ss.getSheetByName("Report");
   var target3=ss.getSheetByName("Report (1)");
   var target4=ss.getSheetByName("Report (2)");
   var target5=ss.getSheetByName("Report (3)");
-  var sheets=[target1,target2,target3,target4,target5];var temp;var check=[];
+  var sheets=[target1,target2,target3,target4,target5];var temp,temp1;var current;
   if(target2==null||target1==null||target3==null||target4==null||target5==null){ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK); return;}
-  ss.setActiveSheet(target2);
-  SpreadsheetApp.flush();
-  while(!found){
-    sheets=ui.alert("New PVR", "Is this the sheet that contains the NEW PVR?", ui.ButtonSet.YES_NO_CANCEL);
-    if(sheets==ui.Button.YES){found=true;}
-    else if(sheets==ui.Button.NO){
-      temp=target2;target2=target3;target3=temp;
-      ss.setActiveSheet(target2);
-      SpreadsheetApp.flush();
-    }
-    else if(sheets==ui.Button.CANCEL){ss.toast('Axcessa values were not uploaded.','Import Cancelled');return;}
-  }Logger.log(target2.getSheetName());
-  sheets=[target1,target2,target3];
-  found=false;
-  while(!found){
-    var dateInput = ui.prompt('Enter Date','Enter the date where values should be pasted (MM-DD):',ui.ButtonSet.OK_CANCEL);
-    if(dateInput.getSelectedButton()==ui.Button.CANCEL){ss.toast('Axcessa values were not uploaded.','Import Cancelled');return;}
-    if(dateInput.getResponseText().length!=5 || dateInput.getResponseText().split("-")[0].length!=2){ui.alert("Error!", "The date you entered '"+dateInput.getResponseText()+"' is in an incorrect format. Please try again in the format of 'MM-DD'", ui.ButtonSet.OK);}
-    else{found=true;}
-  }
   var values1=target1.getRange(1,1,target1.getLastRow(),target1.getLastColumn()).getValues();
   var values2=target2.getRange(1,1,target2.getLastRow(),target2.getLastColumn()).getValues();
   var values3=target3.getRange(1,1,target3.getLastRow(),target3.getLastColumn()).getValues();
-  var allValues=[values1,values2,values3];
-  var primary=ss.getSheetByName("Team Jeff");
-  var dates=primary.getRange(2,1,1,primary.getLastColumn()).getDisplayValues();var sheet_name="";var col=0;
-  var teams=viewTeams();
-  var rows, sheet, range, row, formulas, cas, accValue;
+  var values4=target4.getRange(1,1,target4.getLastRow(),target4.getLastColumn()).getValues();
+  var values5=target5.getRange(1,1,target5.getLastRow(),target5.getLastColumn()).getValues();
+  var pvr=[];var counts=[];
+  var allValues=[values1,values2,values3,values4,values5];
+  var allTargets=[target1,target2,target3,target4,target5];
   var cols=[];var acc=[];
   for(var i=1;i<allValues.length;i++){
     for(var j=0;j<allValues[i][0].length;j++){
@@ -46,6 +26,67 @@ function axcessa() {
       else if(allValues[i][0][j]=="Product"){cols[i-1]=j;j=allValues[i][0].length;}
     }
   }
+  temp1=[];
+  for(i=1;i<allValues.length;i++){
+    temp1[i-1]=0;
+    for(j=1;j<allValues[i].length;j++){
+      temp1[i-1]+=allValues[i][j][cols[i-1]];
+    }
+  }
+  Logger.log(cols);Logger.log(acc);
+  for(i=0;i<temp1.length;i++){
+    for(j=0;j<temp1.length;j++){
+      if(j+1<temp1.length){
+        if(temp1[j]<temp1[j+1]){
+          temp=temp1[j+1];temp1[j+1]=temp1[j];temp1[j]=temp;
+          temp=allValues[j+1];allValues[j+1]=allValues[j+2];allValues[j+2]=temp;
+          temp=allTargets[j+1];allTargets[j+1]=allTargets[j+2];allTargets[j+2]=temp;
+          temp=cols[j];cols[j]=cols[j+1];cols[j+1]=temp;
+          temp=acc[j];acc[j]=acc[j+1];acc[j+1]=temp;
+        }
+      }
+    }
+  }
+  ss.setActiveSheet(target2);
+  SpreadsheetApp.flush();
+  found=false;
+  while(!found){
+    sheets=ui.alert("New PVR", "Is this the sheet that contains the NEW PVR?", ui.ButtonSet.YES_NO_CANCEL);
+    if(sheets==ui.Button.YES){found=true;}
+    else if(sheets==ui.Button.NO){
+      temp=target2;target2=target3;target3=temp;
+      temp=values2;values2=values3;values3=temp;
+      ss.setActiveSheet(target2);
+      SpreadsheetApp.flush();
+    }
+    else if(sheets==ui.Button.CANCEL){ss.toast('Axcessa values were not uploaded.','Import Cancelled');return;}
+  }
+  found=false;
+  ss.setActiveSheet(target4);
+  SpreadsheetApp.flush();
+  while(!found){
+    sheets=ui.alert("New Counts", "Is this the sheet that contains the NEW counts?", ui.ButtonSet.YES_NO_CANCEL);
+    if(sheets==ui.Button.YES){found=true;}
+    else if(sheets==ui.Button.NO){
+      temp=target4;target4=target5;target5=temp;
+      temp=values4;values4=values5;values5=temp;
+      ss.setActiveSheet(target4);
+      SpreadsheetApp.flush();
+    }
+    else if(sheets==ui.Button.CANCEL){ss.toast('Axcessa values were not uploaded.','Import Cancelled');return;}
+  }
+  sheets=[target1,target2,target3,target4,target5];
+  found=false;
+  while(!found){
+    var dateInput = ui.prompt('Enter Date','Enter the date where values should be pasted (MM-DD):',ui.ButtonSet.OK_CANCEL);
+    if(dateInput.getSelectedButton()==ui.Button.CANCEL){ss.toast('Axcessa values were not uploaded.','Import Cancelled');return;}
+    if(dateInput.getResponseText().length!=5 || dateInput.getResponseText().split("-")[0].length!=2){ui.alert("Error!", "The date you entered '"+dateInput.getResponseText()+"' is in an incorrect format. Please try again in the format of 'MM-DD'", ui.ButtonSet.OK);}
+    else{found=true;}
+  }
+  var primary=ss.getSheetByName("Team Jeff");
+  var dates=primary.getRange(2,1,1,primary.getLastColumn()).getDisplayValues();var sheet_name="";var col=0;
+  var teams=viewTeams();
+  var rows, sheet, range, row, formulas, cas, accValue;
   ss.getSheetByName("1v1").hideSheet();
   for(var i=0;i<dates[0].length;i++){
     if(dates[0][i]==dateInput.getResponseText()){col=parseInt(parseInt(i)+parseInt(1));i=dates[0].length;}
@@ -66,43 +107,67 @@ function axcessa() {
         if(values1[k]!=undefined && values1[k][0]!="" && values1[k][0]!="Employee"){
           if(values1[k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 1 "+values1[k][1]+" "+values1[k][2]);
-            range[row][0]=values1[k][1];row++;
-            range[row][0]=values1[k][2];row++;
+            range[row][0]=values1[k][1];
+            range[row+1][0]=values1[k][2];
             found=true;
           }
         }
       }
-      if(!found){Logger.log(cas[j]+" wasn't found in "+target1.getSheetName());range[row][0]=0;row++;range[row][0]=0;row++;}
+      if(!found){Logger.log(cas[j]+" wasn't found in "+target1.getSheetName());range[row][0]=0;range[row+1][0]=0;}
       found=false;
       for(k=0;k<values2.length && !found;k++){
         if((values2[k]==undefined || values2[k][0]=="" || values2[k][0]==undefined) && (values2[k+1]==undefined || values2[k+1][0]=="" || values2[k+1][0]==undefined)){break;}
         if(values2[k]!=undefined && values2[k][0]!="" && values2[k][0]!="Name"){
           if(values2[k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 2 "+values2[k][cols[0]]+" "+values2[k][cols[0]+1]);
-            range[row][0]=Math.round(values2[k][cols[0]]);row++;
-            range[row][0]=Math.round(values2[k][cols[0]+1]);row++;
-            accValue+=Math.round(parseInt(values2[k][acc[0]]));
+            range[row+3][0]=Math.round(values2[k][cols[0]+1]);
             found=true;
           }
         }
       }
-      if(!found){Logger.log(cas[j]+" wasn't found in "+target2.getSheetName());range[row][0]=0;row++;range[row][0]=0;row++;}
+      if(!found){Logger.log(cas[j]+" wasn't found in "+target2.getSheetName());range[row+3][0]=0;}
       found=false;
       for(k=0;k<values3.length && !found;k++){
         if((values3[k]==undefined || values3[k][0]=="" || values3[k][0]==undefined) && (values3[k+1]==undefined || values3[k+1][0]=="" || values3[k+1][0]==undefined)){break;}
         if(values3[k]!=undefined && values3[k][0]!="" && values3[k][0]!="Name"){
           if(values3[k][0].toLowerCase()==cas[j].toLowerCase()){
-            Logger.log("Found "+cas[j]+" in 3 "+values3[k][cols[1]]+" "+values3[k][cols[2]+1]);
-            range[row][0]=Math.round(values3[k][cols[1]]);row++;
-            range[row][0]=Math.round(values3[k][cols[1]+1]);row++;
-            accValue+=Math.round(parseInt(values3[k][acc[1]]));
+            Logger.log("Found "+cas[j]+" in 3 "+values3[k][cols[1]]+" "+values3[k][cols[1]+1]);
+            range[row+5][0]=Math.round(values3[k][cols[1]+1]);
             found=true;
           }
         }
       }
-      if(!found){Logger.log(cas[j]+" wasn't found in "+target3.getSheetName());range[row][0]=0;row++;range[row][0]=0;row++;}
-      Logger.log("Adding accValue '"+accValue+"' to range at row "+row);
-      range[row][0]=accValue;row++;
+      if(!found){Logger.log(cas[j]+" wasn't found in "+target3.getSheetName());range[row+5][0]=0;}
+      found=false;
+      for(k=0;k<values4.length && !found;k++){
+        if((values4[k]==undefined || values4[k][0]=="" || values4[k][0]==undefined) && (values4[k+1]==undefined || values4[k+1][0]=="" || values4[k+1][0]==undefined)){break;}
+        if(values4[k]!=undefined && values4[k][0]!="" && values4[k][0]!="Name"){
+          if(values4[k][0].toLowerCase()==cas[j].toLowerCase()){
+            Logger.log("Found "+cas[j]+" in 4 "+values4[k][cols[2]]);
+            if(values4[k][1]==0){range[row+2][0]="N/A";}
+            else{range[row+2][0]=Math.round((values4[k][cols[2]]-values4[k][acc[2]])/values4[k][1]);}
+            accValue+=Math.round(parseInt(values4[k][acc[2]]));
+            found=true;
+          }
+        }
+      }
+      if(!found){Logger.log(cas[j]+" wasn't found in "+target4.getSheetName());range[row+2][0]=0;}
+      found=false;
+      for(k=0;k<values5.length && !found;k++){
+        if((values5[k]==undefined || values5[k][0]=="" || values5[k][0]==undefined) && (values5[k+1]==undefined || values5[k+1][0]=="" || values5[k+1][0]==undefined)){break;}
+        if(values5[k]!=undefined && values5[k][0]!="" && values5[k][0]!="Name"){
+          if(values5[k][0].toLowerCase()==cas[j].toLowerCase()){
+            Logger.log("Found "+cas[j]+" in 5 "+values5[k][cols[3]]);
+            if(values5[k][1]==0){range[row+4][0]="N/A";}
+            else{range[row+4][0]=Math.round((values5[k][cols[2]]-values5[k][acc[2]])/values5[k][1]);}
+            accValue+=Math.round(parseInt(values5[k][acc[3]]));
+            found=true;
+          }
+        }
+      }
+      if(!found){Logger.log(cas[j]+" wasn't found in "+target5.getSheetName());range[row+4][0]=0;}
+      Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
+      range[row+6][0]=accValue;
     }
     for(j=0;j<formulas.length;j++){
       if(formulas[j][0]!=""){range[j][0]=formulas[j][0];}
