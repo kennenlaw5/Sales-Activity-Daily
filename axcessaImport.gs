@@ -1,6 +1,6 @@
 function axcessa() {
   //Created By Kennen Larence
-  //Version 1.0
+  //Version 1.2.2
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi(); 
   var found=false;
@@ -11,6 +11,7 @@ function axcessa() {
   var target5=ss.getSheetByName("Report (3)");
   var sheets=[target1,target2,target3,target4,target5];var temp,temp1;var current;
   if(target2==null||target1==null||target3==null||target4==null||target5==null){ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK); return;}
+  ss.toast('FURTHER ACTION NEEDED! Currently analyzing the imported sheets. Please wait for the pop up.', 'Please wait...');return;
   var values1=target1.getRange(1,1,target1.getLastRow(),target1.getLastColumn()).getValues();
   var values2=target2.getRange(1,1,target2.getLastRow(),target2.getLastColumn()).getValues();
   var values3=target3.getRange(1,1,target3.getLastRow(),target3.getLastColumn()).getValues();
