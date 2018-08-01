@@ -145,7 +145,10 @@ function axcessa() {
           if(values4[k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 4 "+values4[k][cols[2]]);
             if(values4[k][1]==0){range[row+2][0]="N/A";}
-            else{range[row+2][0]=Math.round((values4[k][cols[2]]-values4[k][acc[2]])/values4[k][1]);}
+            else{
+              range[row+2][0]=(values4[k][cols[2]]-values4[k][acc[2]])/values4[k][1];
+              range[row+2][0]=range[row+2][0].toFixed(1);
+            }
             accValue+=Math.round(parseInt(values4[k][acc[2]]));
             found=true;
           }
@@ -159,7 +162,10 @@ function axcessa() {
           if(values5[k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 5 "+values5[k][cols[3]]);
             if(values5[k][1]==0){range[row+4][0]="N/A";}
-            else{range[row+4][0]=Math.round((values5[k][cols[2]]-values5[k][acc[2]])/values5[k][1]);}
+            else{
+              range[row+4][0]=(values5[k][cols[3]]-values5[k][acc[3]])/values5[k][1];
+              range[row+4][0]=range[row+4][0].toFixed(1);
+            }
             accValue+=Math.round(parseInt(values5[k][acc[3]]));
             found=true;
           }
