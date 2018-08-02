@@ -4,9 +4,11 @@ function teamCounts(team,range){
   var sheet=ss.getSheetByName(team);
   var rows=teamRows(team);
   var values=[];
-  for(var i=0;i<numProd;i++){values[i]=[0];}
+  for(var i=0;i<numProd+1;i++){values[i]=[0];}
   for(i=0;i<rows.length;i++){
-    Logger.log(rows[i]);
+    if(!isNaN(parseInt(range[rows[i]+15][0]))){
+      values[numProd][0]+=range[rows[i]+15][0];
+    }
     rows[i]+=20;
     Logger.log(rows[i]);
     for(var j=0;j<numProd;j++){
