@@ -11,6 +11,9 @@ function onOpen() {
   .addItem('Refresh CA Ranking','rank').addItem('Import Scoreboard','scoreboard').addItem('Axcessa Import','axcessa').addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
+  ss.getSheetByName("1v1").hideSheet();
+  ss.getSheetByName("SBMaster").hideSheet();
+  SpreadsheetApp.flush();
   SpreadsheetApp.getActiveSpreadsheet().toast(message, title);
 }
 function menuItem1() {
