@@ -32,9 +32,10 @@ function teamNames(sheet_name) {
     return name=["Ben W","Tim G","Josh"];
   }
 }
-function viewTeams(){
+function viewTeams(type){
   //Created By Kennen Larence
   var names=["Team Jeff","Team Ben","Team Robb","Team Anna","Team Seth","Team Dean"];
+  if(type=="counts"){return [names];}
   return names;
 }
 function axcessaNames(sheet_name){
