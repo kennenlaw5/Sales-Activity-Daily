@@ -17,5 +17,6 @@ function teamCounts(team,range){
       }
     }
   }
+  values[numProd][0]/=rows.length;
   return values;
 }
