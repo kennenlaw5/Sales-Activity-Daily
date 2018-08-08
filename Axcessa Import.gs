@@ -1,6 +1,6 @@
 function axcessa() {
   //Created By Kennen Larence
-  //Version 1.2.2
+  //Version 1.2.4
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi(); 
   var found=false;
@@ -26,6 +26,7 @@ function axcessa() {
       if(allValues[i][0][j]=="Acc"){acc[i-1]=j;}
       else if(allValues[i][0][j]=="Product"){cols[i-1]=j;j=allValues[i][0].length;}
     }
+    if(acc[i-1]==undefined){acc[i-1]="None";}
   }
   temp1=[];
   for(i=1;i<allValues.length;i++){
@@ -99,6 +100,7 @@ function axcessa() {
   for(i=0;i<teams.length;i++){
     sheet_name=teams[i];
     sheet=ss.getSheetByName(sheet_name);
+    ss.toast(sheet.getSheetName()+' values are being imported.', sheet.getSheetName());
     rows=teamRows(sheet_name);
     cas=axcessaNames(sheet_name);
     range=sheet.getRange(1,col,sheet.getLastRow(),1).getValues();
@@ -149,12 +151,20 @@ function axcessa() {
         if(allValues[3][k]!=undefined && allValues[3][k][0]!="" && allValues[3][k][0]!="Name"){
           if(allValues[3][k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 4 "+allValues[3][k][cols[2]]);
-            if(allValues[3][k][1]==0){range[row+2][0]="N/A";}
+            if(allValues[3][k][1]==0 && acc[2]!="None"){
+              accValue+=Math.round(parseInt(allValues[3][k][acc[2]]));
+              range[row+2][0]="N/A";
+            }else if(allValues[3][k][1]==0 && acc[2]=="None"){
+              range[row+2][0]="N/A";
+            }else if(acc[2]=="None"){
+              range[row+2][0]=allValues[3][k][cols[2]]/allValues[3][k][1];
+              range[row+2][0]=range[row+2][0].toFixed(1);
+            }
             else{
               range[row+2][0]=(allValues[3][k][cols[2]]-allValues[3][k][acc[2]])/allValues[3][k][1];
               range[row+2][0]=range[row+2][0].toFixed(1);
+              accValue+=Math.round(parseInt(allValues[3][k][acc[2]]));
             }
-            accValue+=Math.round(parseInt(allValues[3][k][acc[2]]));
             found=true;
           }
         }
@@ -166,12 +176,20 @@ function axcessa() {
         if(allValues[4][k]!=undefined && allValues[4][k][0]!="" && allValues[4][k][0]!="Name"){
           if(allValues[4][k][0].toLowerCase()==cas[j].toLowerCase()){
             Logger.log("Found "+cas[j]+" in 5 "+allValues[4][k][cols[3]]);
-            if(allValues[4][k][1]==0){range[row+4][0]="N/A";}
+            if(allValues[4][k][1]==0 && acc[3]!="None"){
+              accValue+=Math.round(parseInt(allValues[4][k][acc[3]]));
+              range[row+4][0]="N/A";
+            }else if(allValues[4][k][1]==0 && acc[3]=="None"){
+              range[row+4][0]="N/A";
+            }else if(acc[3]=="None"){
+              range[row+4][0]=allValues[4][k][cols[3]]/allValues[4][k][1];
+              range[row+4][0]=range[row+4][0].toFixed(1);
+            }
             else{
               range[row+4][0]=(allValues[4][k][cols[3]]-allValues[4][k][acc[3]])/allValues[4][k][1];
               range[row+4][0]=range[row+4][0].toFixed(1);
+              accValue+=Math.round(parseInt(allValues[4][k][acc[3]]));
             }
-            accValue+=Math.round(parseInt(allValues[4][k][acc[3]]));
             found=true;
           }
         }
@@ -185,6 +203,7 @@ function axcessa() {
     }
     //Logger.log(range);
     sheet.getRange(1,col,sheet.getLastRow(),1).setValues(range);
+    ss.toast(sheet.getSheetName()+' has imported successfully.', sheet.getSheetName());
   }
   for(i=0;i<allTargets.length;i++){ss.deleteSheet(allTargets[i]);}
   ss.deleteSheet(ss.getSheetByName("Store Summary"));
