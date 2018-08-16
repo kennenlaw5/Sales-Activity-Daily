@@ -1,6 +1,6 @@
 function rank(){
   //Version 3.1
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //initialization
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet;
@@ -132,7 +132,7 @@ function rank(){
 }
 function ranking(){
   //Version 2.1
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("CA Ranking");
   var names = sheet.getRange("B2:B29").getValues();

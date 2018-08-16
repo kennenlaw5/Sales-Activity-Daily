@@ -1,5 +1,5 @@
 function aStats(sheet_name,ca,type,x) {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 3.1
   //sheet_name="Team Jeff/Anna";ca="maxMin";type="Videos";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -90,7 +90,7 @@ function aStats(sheet_name,ca,type,x) {
 }
 
 function maxMin(sheet_name,type,x){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 2.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);

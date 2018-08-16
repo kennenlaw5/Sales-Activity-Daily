@@ -1,5 +1,5 @@
 function axcessa() {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 1.2.4
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi(); 

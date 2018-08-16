@@ -1,5 +1,5 @@
 function scoreboard() {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 1.5
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi();
@@ -66,7 +66,7 @@ function scoreboard() {
   ss.toast('Scoreboard import complete!', 'Complete!');
 }
 function hardPrint(name){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var sheet=ss.getSheetByName(name);
   //var sheet=ss.getActiveSheet();

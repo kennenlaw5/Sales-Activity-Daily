@@ -1,5 +1,5 @@
 function newMonth() {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var teams=viewTeams();
   var sheet;var range;var rows;var row;
