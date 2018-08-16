@@ -1,5 +1,5 @@
 function onOpen() {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Stats"));
   ss.getSheetByName("Team Stats").getRange("B2").getValue();
@@ -20,7 +20,7 @@ function menuItem1() {
   SpreadsheetApp.getUi().alert('Call or text (720) 317-5427');
 }
 function menuItem2() {
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ui = SpreadsheetApp.getUi();
   var input = ui.prompt('Email Sheet Creator','Describe the issue you\'re having in the box below, then press "Ok" to submit your issue via email:',ui.ButtonSet.OK_CANCEL);
   if (input.getSelectedButton() == ui.Button.OK) {
@@ -30,7 +30,7 @@ function menuItem2() {
   }
 }
 function reset(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
   sheet.getRange("B2:B7").setValue('---');
@@ -38,7 +38,7 @@ function reset(){
   ss.getSheetByName("1v1").hideSheet();
 }
 function all(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
   var preRange=sheet.getRange("B2:I7");
@@ -50,14 +50,14 @@ function all(){
   emailPopUp('All teams and points shown successfully','All stats shown!');
 }
 function leaders(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
   var range1 = sheet.getRange("B2:B7").setValue('---');
   var range2 = sheet.getRange("I2:I7").setValue('All');
 }
 function refresh(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 3.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
@@ -67,7 +67,7 @@ function refresh(){
   emailPopUp('All stats refreshed successfully','Stats Refreshed');
 }
 function refreshpts(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   //Version 2.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
@@ -77,7 +77,7 @@ function refreshpts(){
   emailPopUp('Points refreshed successfully','Points Refreshed');
 }
 function team_lead(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
   var range = sheet.getRange("J2:J7").getValues();
@@ -97,7 +97,7 @@ function team_lead(){
   if(max==0){return "No Data!";}else{return team+": "+max+"pts";}
 }
 function team_tail(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
   var range = sheet.getRange("J2:J7").getValues();
@@ -115,17 +115,17 @@ function team_tail(){
   if(min==0&&team_lead()=="No Data!"){return "No Data!";}else{return team+": "+min+"pts";}
 }
 function goto(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Stats"));
 }
 function viewrank(){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName("CA Ranking"));
 }
 function emailPopUp(message,title){
-  //Created By Kennen Larence
+  //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var email = Session.getActiveUser().getEmail();
   var name;var first;
