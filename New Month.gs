@@ -20,6 +20,8 @@ function newMonth() {
     sheet.getRange(2,3,sheet.getLastRow()-1,sheet.getLastColumn()-2).clearNote();
   }
   sbClear();
+  rank();
+  reset();
 }
 function sbClear(){
   var ss=SpreadsheetApp.getActiveSpreadsheet();
