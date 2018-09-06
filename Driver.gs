@@ -43,7 +43,7 @@ function axcessaNames(sheet_name){
   if(sheet_name=="Team Jeff"){
     return name=["Brian Neal","Jonthan Wingfield","Omar Johnson","Jeremy Sanchez","Ian Hudgens"];
   }else if(sheet_name=="Team Ben"){
-    return name=["Demitri Gavito","Patrick Quinlan","Tony Moomau","Karen Timmons","Troy","Stephen Giese"];
+    return name=["Demitri Gavito","Patrick Quinlan","Tony Moomau","Karen Timmons","Troy Roth","Stephen Giese"];
   }else if(sheet_name=="Team Robb"){
     return name=["Agymang Spencer","Jacob Ford","Kathy Powell","Chris Castro","Conner Graves"];
   }else if(sheet_name=="Team Anna"){
