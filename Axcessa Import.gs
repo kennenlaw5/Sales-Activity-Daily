@@ -32,7 +32,7 @@ function axcessa() {
   for(i=1;i<allValues.length;i++){
     temp1[i-1]=0;
     for(j=1;j<allValues[i].length;j++){
-      temp1[i-1]+=allValues[i][j][cols[i-1]];
+      temp1[i-1]+=allValues[i][j][cols[i-1]+1];
     }
   }
   Logger.log(cols);Logger.log(acc);
