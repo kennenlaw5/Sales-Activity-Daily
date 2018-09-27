@@ -1,4 +1,4 @@
-function teamCounts(team,range){
+function teamCounts (team,range) {
   var numProd=7;
   var ss=SpreadsheetApp.getActiveSpreadsheet();
   var sheet=ss.getSheetByName(team);
