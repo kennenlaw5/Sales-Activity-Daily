@@ -76,11 +76,10 @@ function refreshpts(){
   sheet.getRange("A10").setValue(range);
   emailPopUp('Points refreshed successfully','Points Refreshed');
 }
-function team_lead(){
+function team_lead(range){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("J2:J7").getValues();
   var max=0;
   var names=viewTeams();
   var team="";
@@ -88,31 +87,30 @@ function team_lead(){
   var tie=[];var t=0;
   for(var i in range){
     rank[i]=[range[i][0],names[i]];
-    if(rank[i][0]>max){max=rank[i][0];t=0;team=rank[i][1];}else if(rank[i][0]==max){if(t==0){tie[t]=rank[i][1];t+=1;}tie[t]=rank[i][1];t+=1;team="Tie";}
+    if(rank[i][0]>max){max=parseInt(rank[i][0]);t=0;team=rank[i][1];}else if(rank[i][0]==max){if(t==0){tie[t]=team;t+=1;}tie[t]=rank[i][1];t+=1;}
   }
-  if(team=="Tie"){
-    for(var m in tie){if(m==0){team=tie[0];}else{team+=", "+tie[m]}}
+  if(t>0){
+    for(i in tie){if(i==0){team=tie[0];}else{team+=", "+tie[i]}}
     team+=" Tied";
-  }//else{team="Team "+team;}
+  }
   if(max==0){return "No Data!";}else{return team+": "+max+"pts";}
 }
-function team_tail(){
+function team_tail(range){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("J2:J7").getValues();
   var min=9000;
   var names=viewTeams();
   var team;
   var tie=[];var t=0;
   for(var i in range){
-    if(range[i][0]<min){min=range[i][0];team=names[i];t=0;}else if(range[i][0]==min){if(t==0){tie[t]=team;t+=1;}tie[t]=names[i];t+=1;team="Tie";}
+    if(range[i][0]<min){min=range[i][0];team=names[i];t=0;}else if(range[i][0]==min){if(t==0){tie[t]=team;t+=1;}tie[t]=names[i];t+=1;}
   }
-  if(team=="Tie"){
-    for(var m in tie){if(m==0){team=tie[0];}else{team+=", "+tie[m]}}
+  if (t > 0) {
+    for(i in tie){if(i==0){team=tie[0];}else{team+=", "+tie[i]}}
     team+=" Tied";
-  }//else{team="Team "+team;}
-  if(min==0&&team_lead()=="No Data!"){return "No Data!";}else{return team+": "+min+"pts";}
+  }
+  if (min == 0 && t >= names.length) { return "No Data!"; } else{ return team+": "+min+"pts"; }
 }
 function goto(){
   //Created By Kennen Lawrence
