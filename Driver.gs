@@ -2,7 +2,7 @@ function teamRows(sheet_name) {
   //Created By Kennen Lawrence
   var rows;
   if(sheet_name=="Team Jeff"){
-      return rows=[3,37,71,105];
+      return rows=[3,37,71];
     }else if(sheet_name=="Team Ben"){
       return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Robb"){
@@ -19,7 +19,7 @@ function teamNames(sheet_name) {
   //Created By Kennen Lawrence
   var name;
   if(sheet_name=="Team Jeff"){
-    return name=["Omar","Jeremy","Ian","Demitri"];
+    return name=["Omar","Ian","Demitri"];
   }else if(sheet_name=="Team Ben"){
     return name=["Patrick","Tony","Troy","Stephen","Willard","Damir"];
   }else if(sheet_name=="Team Robb"){
@@ -41,7 +41,7 @@ function viewTeams(type){
 function axcessaNames(sheet_name){
   var name;
   if(sheet_name=="Team Jeff"){
-    return name=["Omar Johnson","Jeremy Sanchez","Ian Hudgens","Demitri Gavito"];
+    return name=["Omar Johnson","Ian Hudgens","Demitri Gavito"];
   }else if(sheet_name=="Team Ben"){
     return name=["Patrick Quinlan","Tony Moomau","Troy Roth","Stephen Giese","Willard Lovell","Damir Memisevic"];
   }else if(sheet_name=="Team Robb"){
