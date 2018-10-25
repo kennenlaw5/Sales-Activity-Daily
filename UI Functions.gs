@@ -153,3 +153,7 @@ function getName(){
   Logger.log(name);
   return name;
 }
+
+function showHide (rows) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+}

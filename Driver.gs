@@ -1,4 +1,4 @@
-function teamRows(sheet_name) {
+function teamRows (sheet_name) {
   //Created By Kennen Lawrence
   var rows;
   if(sheet_name=="Team Jeff"){
@@ -15,7 +15,8 @@ function teamRows(sheet_name) {
       return rows=[3,37,71,105];
     }
 }
-function teamNames(sheet_name) {
+
+function teamNames (sheet_name) {
   //Created By Kennen Lawrence
   var name;
   if(sheet_name=="Team Jeff"){
@@ -32,13 +33,15 @@ function teamNames(sheet_name) {
     return name=["Tim G","Josh","Fika","Brian"];
   }
 }
-function viewTeams(type){
+
+function viewTeams (type) {
   //Created By Kennen Lawrence
-  var names=["Team Jeff","Team Ben","Team Robb","Team Anna","Team Seth","Team Dean"];
-  if(type=="counts"){return [names];}
+  var names = ["Team Jeff","Team Ben","Team Robb","Team Anna","Team Seth","Team Dean"];
+  if (type=="counts") { return [names]; }
   return names;
 }
-function axcessaNames(sheet_name){
+
+function axcessaNames (sheet_name) {
   var name;
   if(sheet_name=="Team Jeff"){
     return name=["Omar Johnson","Ian Hudgens","Demitri Gavito"];
@@ -53,4 +56,21 @@ function axcessaNames(sheet_name){
   }else if(sheet_name=="Team Dean"){
     return name=["Tim Green","Joshua Ackerman","Fika Host","Brian Neal"];
   }
+}
+
+function dataRows (request) {
+  var rowOrder = ['emails','texts','3min','total calls','accolades','testimonials','advantastart','max digital','videos','fresh','phone'
+                  ,'internet','appts','mtdAppts','podium','closing ratio','internet closing','phone closing','fresh closing','opent events'
+                  ,'new','used','new product','new pvr','used product','used pvr','accessories','bulletin','1v1','help','tasks'
+                  ,'follow through','blank'];
+  var view, i, start, end;
+  var found = false;
+  if (request == 'activity') {
+    start = 'emails';
+    end = 'mtdAppts';
+    for (i = 0; i < rowOrder.length; i++) {
+      if (found && rowOrder[i] == end) { found = false; }
+    }
+  }
+  return rowOrder;
 }
