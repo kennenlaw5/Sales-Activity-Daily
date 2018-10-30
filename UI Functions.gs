@@ -14,7 +14,7 @@ function onOpen() {
   ss.getSheetByName("1v1").hideSheet();
   ss.getSheetByName("SBMaster").hideSheet();
   SpreadsheetApp.flush();
-  SpreadsheetApp.getActiveSpreadsheet().toast(message, title);
+  ss.toast(message, title);
 }
 function menuItem1() {
   SpreadsheetApp.getUi().alert('Call or text (720) 317-5427');
