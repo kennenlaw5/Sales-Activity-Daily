@@ -24,7 +24,7 @@ function menuItem2() {
   var ui = SpreadsheetApp.getUi();
   var input = ui.prompt('Email Sheet Creator','Describe the issue you\'re having in the box below, then press "Ok" to submit your issue via email:',ui.ButtonSet.OK_CANCEL);
   if (input.getSelectedButton() == ui.Button.OK) {
-    MailApp.sendEmail('kennen.lawrence@schomp.com','HELP Sales Daily_October',input.getResponseText(),{name:getName()});
+    MailApp.sendEmail('kennen.lawrence@schomp.com','HELP Sales Daily_November',input.getResponseText(),{name:getName()});
   } else if (input.getSelectedButton() == ui.Button.CANCEL) {
     Logger.log('User cancelled');
   }
