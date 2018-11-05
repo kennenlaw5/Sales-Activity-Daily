@@ -2,7 +2,7 @@ function teamRows (sheet_name) {
   //Created By Kennen Lawrence
   var rows;
   if(sheet_name=="Team Jeff"){
-      return rows=[3,37,71,105,139,173];
+      return rows=[3,37,71,105,139];
     }else if(sheet_name=="Team Ben"){
       return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Robb"){
@@ -10,7 +10,7 @@ function teamRows (sheet_name) {
     }else if(sheet_name=="Team Anna"){
       return rows=[3,37,71,105,139,173];
     }else if(sheet_name=="Team Seth"){
-      return rows=[3,37,71,105,139,173,207];
+      return rows=[3,37,71,105,139,173,207,241];
     }else if(sheet_name=="Team Dean"){
       return rows=[3,37,71,105];
     }
@@ -20,7 +20,7 @@ function teamNames (sheet_name) {
   //Created By Kennen Lawrence
   var name;
   if(sheet_name=="Team Jeff"){
-    return name=["Omar","Ian","Demitri","Alex D","Steven","Shahin"];
+    return name=["Omar","Ian","Demitri","Steven","Shahin"];
   }else if(sheet_name=="Team Ben"){
     return name=["Patrick","Tony","Troy","Stephen","Willard","Damir"];
   }else if(sheet_name=="Team Robb"){
@@ -28,7 +28,7 @@ function teamNames (sheet_name) {
   }else if(sheet_name=="Team Anna"){
     return name=["Sam","Connor","Ace","Andrew","Erin","Wil"];
   }else if(sheet_name=="Team Seth"){
-    return name=["Jeff H","Chuck","Chris L","Toby","Marlowe","Craig","Patrick S"];
+    return name=["Jeff H","Chuck","Chris L","Toby","Marlowe","Craig","Patrick S","Alex D"];
   }else if(sheet_name=="Team Dean"){
     return name=["Tim G","Josh","Fika","Brian"];
   }
@@ -44,7 +44,7 @@ function viewTeams (type) {
 function axcessaNames (sheet_name) {
   var name;
   if(sheet_name=="Team Jeff"){
-    return name=["Omar Johnson","Ian Hudgens","Demitri Gavito","Alexander Duquette","Steve Nelson","Shahin Nia"];
+    return name=["Omar Johnson","Ian Hudgens","Demitri Gavito","Steve Nelson","Shahin Nia"];
   }else if(sheet_name=="Team Ben"){
     return name=["Patrick Quinlan","Tony Moomau","Troy Roth","Stephen Giese","Willard Lovell","Damir Memisevic"];
   }else if(sheet_name=="Team Robb"){
@@ -52,7 +52,7 @@ function axcessaNames (sheet_name) {
   }else if(sheet_name=="Team Anna"){
     return name=["Sam Nejad","Connor Hanlon","Ace Taylor-Brown","Andrew Sapoznik","Erin Vangilder","Wil Lemon"];
   }else if(sheet_name=="Team Seth"){
-    return name=["Jeffrey Hanson","Chuck Northrup","Christopher Leirer","Toby Hesketh-Tutton","Marlowe Jones","Craig Smeton","Patrick Stenson"];
+    return name=["Jeffrey Hanson","Chuck Northrup","Christopher Leirer","Toby Hesketh-Tutton","Marlowe Jones","Craig Smeton","Patrick Stenson","Alexander Duquette"];
   }else if(sheet_name=="Team Dean"){
     return name=["Tim Green","Joshua Ackerman","Fika Host","Brian Neal"];
   }
