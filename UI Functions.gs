@@ -33,15 +33,17 @@ function reset(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  sheet.getRange("B2:B7").setValue('---');
-  sheet.getRange("I2:I7").setValue('---');
+  var teams = viewTeams().length;
+  sheet.getRange(2, 2, teams).setValue('---');
+  sheet.getRange(2, 9, teams).setValue('---');
   ss.getSheetByName("1v1").hideSheet();
 }
 function all(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var preRange=sheet.getRange("B2:I7");
+  var teams = viewTeams().length;
+  var preRange=sheet.getRange(2, 2, teams, 8);
   var range=preRange.getFormulas();
   for(var i=0;i<range.length;i++){
     range[i][0]="TEAM";range[i][7]="All";
@@ -53,8 +55,9 @@ function leaders(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range1 = sheet.getRange("B2:B7").setValue('---');
-  var range2 = sheet.getRange("I2:I7").setValue('All');
+  var teams = viewTeams().length;
+  var range1 = sheet.getRange(2, 2, teams).setValue('---');
+  var range2 = sheet.getRange(2, 9, teams).setValue('All');
 }
 function refresh(){
   //Created By Kennen Lawrence

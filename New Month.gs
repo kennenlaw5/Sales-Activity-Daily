@@ -22,6 +22,8 @@ function newMonth() {
   sbClear();
   rank();
   reset();
+  ss.getSheetByName('SBMaster').activate().getRange('A4').activateAsCurrentCell();
+  ss.toast('Please allow access to Scoreboard in cell A4!', 'Allow Access');
 }
 function sbClear(){
   var ss=SpreadsheetApp.getActiveSpreadsheet();
