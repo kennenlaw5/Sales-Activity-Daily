@@ -42,7 +42,7 @@ function scoreboard() {
     }
     else { passed = true; }
   }
-  ss.toast('Generating new sheet for scoreboard.', 'Duplicating Master');
+  ss.toast('Generating new sheet for scoreboard.', 'Duplicating Master', 20);
   master.copyTo(ss).setName(name);
   var sb = ss.getSheetByName(name);
   sb.getRange('D1').setValue(sbInput.getResponseText());
