@@ -1,6 +1,6 @@
 function axcessa() {
   //Created By Kennen Lawrence
-  //Version 1.2.4
+  //Version 1.3.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi(); 
   var found = false;
@@ -10,84 +10,68 @@ function axcessa() {
   var target4 = ss.getSheetByName("Report (2)");
   var target5 = ss.getSheetByName("Report (3)");
   var sheets = [target1, target2, target3, target4, target5];
-  var temp, temp1, current;
-  if (target2 == null || target1 == null || target3 == null || target4 == null || target5 == null) {
+  var allTargets = [target1, null, null, null, null];
+  var temp, temp1;
+  var current, input, type;
+  if (target1 == null || target2 == null || target3 == null || target4 == null || target5 == null) {
     ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK);
     return;
   }
-  ss.toast('FURTHER ACTION NEEDED! Currently analyzing the imported sheets. Please wait for the pop up.', 'Please wait...', 7);
-  var values1 = target1.getRange(1, 1, target1.getLastRow(), target1.getLastColumn()).getValues();
-  var values2 = target2.getRange(1, 1, target2.getLastRow(), target2.getLastColumn()).getValues();
-  var values3 = target3.getRange(1, 1, target3.getLastRow(), target3.getLastColumn()).getValues();
-  var values4 = target4.getRange(1, 1, target4.getLastRow(), target4.getLastColumn()).getValues();
-  var values5 = target5.getRange(1, 1, target5.getLastRow(), target5.getLastColumn()).getValues();
-  var pvr = [];
-  var counts = [];
-  var allValues = [values1, values2, values3, values4, values5];
-  var allTargets = [target1, target2, target3, target4, target5];
+  for (var i = 1; i < sheets.length; i++) {
+    sheets[i].activate();
+    SpreadsheetApp.flush();
+    //Determine new or used
+    if ((allTargets[1] == null || allTargets[3] == null) && (allTargets[2] == null || allTargets[4] == null)) {
+      input = ui.alert('New?', 'Is this a sheet for NEW sales?', ui.ButtonSet.YES_NO);
+      if (input == ui.Button.CLOSE) { return; }
+      if (input == ui.Button.YES) { current = [1, 3]; type = 'new'; }
+      else if (input == ui.Button.NO) { current = [2, 4]; type = 'used'; }
+      else { throw 'Invalid selection made. Neither Yes, No, or Close were selected'; }
+    }
+    //must be used
+    else if (allTargets[1] != null && allTargets[3] != null) { current = [2, 4]; type = 'used'; }
+    //must be new
+    else if (allTargets[2] != null && allTargets[4] != null) { current = [1, 3]; type = 'new'; }
+    //impossible scenario
+    else { throw 'Impossible New/Used scenario at i = ' + i + ' and allTargets = ' + allTargets;}
+    
+    //Determine PVR or Counts
+    if (allTargets[current[0]] == null && allTargets[current[1]] == null) {
+      input = ui.alert('PVR?', 'Is this sheet the ' + type.toUpperCase() + ' PVR sheet?', ui.ButtonSet.YES_NO);
+      if (input == ui.Button.CLOSE) { return; }
+      if (input == ui.Button.YES) { current = current[0]; }
+      else if (input == ui.Button.NO) { current = current[1]; }
+      else { throw 'Invalid selection made. Neither Yes, No, or Close were selected'; }
+    }
+    //must be PVR
+    else if (allTargets[current[0]] == null && allTargets[current[1]] != null) { current = current[0]; }
+    //must be Counts
+    else if (allTargets[current[0]] != null && allTargets[current[1]] == null) { current = current[1]; }
+    //impossible scenario
+    else { throw 'Impossible PVR/Counts scenario at i = ' + i + ' and allTargets = ' + allTargets;}
+    
+    if (current.length == undefined && current > 0 && current < 5 && allTargets[current] == null) { allTargets[current] = sheets[i]; }
+    else { throw 'Selection error at i = ' + i + ' with current = ' + current + ' and allTargets[current] = ' + allTargets[current]; }
+  }
+  //Logger.log(allTargets);
+  for (i = 0; i < allTargets.length; i++) {
+    //Logger.log(allTargets[i].getSheetName());
+  }
+  var allValues = [];
+  for (i = 0; i < allTargets.length; i++) {
+    allValues[i] = allTargets[i].getRange(1, 1, allTargets[i].getLastRow(), allTargets[i].getLastColumn()).getValues();
+    //Logger.log(allValues[i]);
+  }
   var cols = [];
   var acc = [];
-  for (var i = 1; i < allValues.length; i++) {
+  for (i = 1; i < allValues.length; i++) {
     for (var j = 0; j < allValues[i][0].length; j++) {
       if (allValues[i][0][j] == 'Acc') { acc[i-1]=j; }
       else if (allValues[i][0][j] == 'Product') { cols[i-1] = j; j = allValues[i][0].length; }
     }
     if (acc[i-1] == undefined) {acc[i-1] = 'None'; }
   }
-  temp1 = [];
-  for (i = 1; i < allValues.length; i++) {
-    temp1[i-1] = 0;
-    for (j = 1; j < allValues[i].length; j++) {
-      temp1[i-1] += allValues[i][j][cols[i-1]+1];
-    }
-  }
   Logger.log(cols);Logger.log(acc);
-  for (i = 0; i < temp1.length; i++) { 
-    for (j = 0; j < temp1.length; j++) { 
-      if (j + 1 < temp1.length) {
-        if (temp1[j] < temp1[j+1]) {
-          temp = temp1[j+1]; temp1[j+1] = temp1[j]; temp1[j] = temp;
-          temp = allValues[j+1]; allValues[j+1] = allValues[j+2]; allValues[j+2] = temp;
-          temp = allTargets[j+1]; allTargets[j+1] = allTargets[j+2]; allTargets[j+2] = temp;
-          temp = cols[j]; cols[j] = cols[j+1]; cols[j+1] = temp;
-          temp = acc[j]; acc[j] = acc[j+1]; acc[j+1] = temp;
-        }
-      }
-    }
-  }
-  Logger.log(cols);Logger.log(acc);
-  ss.setActiveSheet(allTargets[1]);
-  SpreadsheetApp.flush();
-  found = false;
-  while (!found) {
-    sheets=ui.alert('New PVR', 'Is this the sheet that contains the NEW PVR?', ui.ButtonSet.YES_NO_CANCEL);
-    if (sheets == ui.Button.YES) { found = true; }
-    else if (sheets == ui.Button.NO) {
-      temp = allTargets[1]; allTargets[1] = allTargets[2]; allTargets[2] = temp;
-      temp = allValues[1]; allValues[1] = allValues[2]; allValues[2] = temp;
-      temp = cols[0]; cols[0] = cols[1]; cols[1] = temp;
-      temp = acc[0]; acc[0] = acc[1]; acc[1] = temp;
-      ss.setActiveSheet(allTargets[1]);
-      SpreadsheetApp.flush();
-    }
-    else if (sheets == ui.Button.CANCEL) { ss.toast('Axcessa values were not uploaded.', 'Import Cancelled'); return; }
-  }
-  found = false;
-  ss.setActiveSheet(allTargets[3]);
-  SpreadsheetApp.flush();
-  while (!found) {
-    sheets = ui.alert('New Counts', 'Is this the sheet that contains the NEW counts?', ui.ButtonSet.YES_NO_CANCEL);
-    if (sheets == ui.Button.YES) { found = true; }
-    else if (sheets == ui.Button.NO) { 
-      temp = allTargets[3]; allTargets[3] = allTargets[4]; allTargets[4] = temp;
-      temp = allValues[3]; allValues[3] = allValues[4]; allValues[4] = temp;
-      temp = cols[2]; cols[2] = cols[3]; cols[3] = temp;
-      temp = acc[2]; acc[2] = acc[3]; acc[3] = temp;
-      ss.setActiveSheet(allTargets[3]);
-      SpreadsheetApp.flush();
-    }
-    else if (sheets == ui.Button.CANCEL) { ss.toast('Axcessa values were not uploaded.', 'Import Cancelled'); return; }
-  }
   found = false;
   while (!found) { 
     var dateInput = ui.prompt('Enter Date', 'Enter the date where values should be pasted (MM-DD):', ui.ButtonSet.OK_CANCEL);
@@ -97,19 +81,16 @@ function axcessa() {
     }
     else { found = true; }
   }
-  var primary = ss.getSheetByName('Team Jeff');
-  var dates = primary.getRange(2, 1, 1, primary.getLastColumn()).getDisplayValues();
   var sheet_name = '';
-  var col = 0;
+  var col = parseInt(dateInput.getResponseText().split('-')[1], 10) + 2;
+  //Logger.log(col);
   var teams = viewTeams();
   var rows, sheet, range, row, formulas, cas, accValue;
-  ss.getSheetByName("1v1").hideSheet();
-  for (i = 0; i < dates[0].length; i++) { 
-    if (dates[0][i] == dateInput.getResponseText()) { col = i + 1; break; }
-  }
+  ss.getSheetByName('1v1').hideSheet();
+  
   for (i = 0; i < teams.length; i++) { 
     sheet_name = teams[i];
-    ss.toast('Importing Axcessa for ' + sheet_name + '.', 'Importing ' + sheet_name);
+    ss.toast('Importing Axcessa for ' + sheet_name + '.', 'Importing ' + sheet_name, 20);
     sheet = ss.getSheetByName(sheet_name);
     rows = teamRows(sheet_name);
     cas = axcessaNames(sheet_name);
@@ -119,13 +100,13 @@ function axcessa() {
       accValue = 0;
       found = false;
       row = parseInt(rows[j]) + 20;
-      for (var k = 0; k < allValues[0].length && !found; k++) { 
+      for (var k = 0; k < allValues[0].length && !found; k++) {
         if ((allValues[0][k] == undefined || allValues[0][k][0] == '' || allValues[0][k][0] == undefined)
             && (allValues[0][k+1] == undefined || allValues[0][k+1][0] == '' || allValues[0][k+1][0] == undefined))
         {
-          break; 
+          break;
         }
-        if (allValues[0][k] != undefined && allValues[0][k][0] != '' && allValues[0][k][0] != 'Employee') { 
+        if (allValues[0][k][0] != '' && allValues[0][k][0] != undefined && allValues[0][k][0] != 'Employee') {
           if (allValues[0][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             Logger.log("Found "+cas[j]+" in 1 "+allValues[0][k][1]+" "+allValues[0][k][2]);
             range[row][0] = allValues[0][k][1];
@@ -232,8 +213,9 @@ function axcessa() {
     }
     //Logger.log(range);
     sheet.getRange(1, col, sheet.getLastRow(), 1).setValues(range);
-    ss.toast(sheet.getSheetName() + ' has imported successfully.', sheet.getSheetName());
   }
+  ss.toast('All teams have been imported successfully. Now deleteing Axcessa sheets.', 'Removing Axcessa Sheets', 20);
   for (i = 0; i < allTargets.length; i++) { ss.deleteSheet(allTargets[i]); }
   ss.deleteSheet(ss.getSheetByName('Store Summary'));
+  ss.toast('Axcessa sheets have been deleted. Import completed successfully!', 'Complete!', 5);
 }
