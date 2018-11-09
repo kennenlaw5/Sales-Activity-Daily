@@ -85,6 +85,8 @@ function axcessa() {
   var teams = viewTeams();
   var rows, sheet, range, row, formulas, cas, accValue;
   ss.getSheetByName('1v1').hideSheet();
+  ss.getSheetByName('Team Stats').activate();
+  SpreadsheetApp.flush();
   
   for (i = 0; i < teams.length; i++) { 
     sheet_name = teams[i];
