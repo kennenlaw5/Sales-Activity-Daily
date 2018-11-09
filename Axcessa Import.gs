@@ -2,8 +2,7 @@ function axcessa() {
   //Created By Kennen Lawrence
   //Version 1.3.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var ui = SpreadsheetApp.getUi(); 
-  var found = false;
+  var ui = SpreadsheetApp.getUi();
   var target1 = ss.getSheetByName("Performance");
   var target2 = ss.getSheetByName("Report");
   var target3 = ss.getSheetByName("Report (1)");
@@ -11,8 +10,7 @@ function axcessa() {
   var target5 = ss.getSheetByName("Report (3)");
   var sheets = [target1, target2, target3, target4, target5];
   var allTargets = [target1, null, null, null, null];
-  var temp, temp1;
-  var current, input, type;
+  var current, input, type, found;
   if (target1 == null || target2 == null || target3 == null || target4 == null || target5 == null) {
     ui.alert('Sheets not uploaded!', 'One or more of the Axcessa sheets are missing or misnamed! Please correct then try again.', ui.ButtonSet.OK);
     return;
@@ -108,14 +106,14 @@ function axcessa() {
         }
         if (allValues[0][k][0] != '' && allValues[0][k][0] != undefined && allValues[0][k][0] != 'Employee') {
           if (allValues[0][k][0].toLowerCase() == cas[j].toLowerCase()) { 
-            Logger.log("Found "+cas[j]+" in 1 "+allValues[0][k][1]+" "+allValues[0][k][2]);
+            //Logger.log("Found "+cas[j]+" in 1 "+allValues[0][k][1]+" "+allValues[0][k][2]);
             range[row][0] = allValues[0][k][1];
             range[row+1][0] = allValues[0][k][2];
             found = true;
           }
         }
       }
-      if (!found) { Logger.log(cas[j]+" wasn't found in "+allTargets[0].getSheetName()); range[row][0]=0; range[row+1][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[0].getSheetName());*/ range[row][0]=0; range[row+1][0]=0; }
       found = false;
       for (k = 0; k < allValues[1].length && !found; k++) { 
         if ((allValues[1][k] == undefined || allValues[1][k][0] == '' || allValues[1][k][0] == undefined)
@@ -125,13 +123,13 @@ function axcessa() {
         }
         if (allValues[1][k] != undefined && allValues[1][k][0] != '' && allValues[1][k][0] != 'Name') { 
           if (allValues[1][k][0].toLowerCase() == cas[j].toLowerCase()) { 
-            Logger.log("Found "+cas[j]+" in 2 "+allValues[1][k][cols[0]]+" "+allValues[1][k][cols[0]+1]);
+            //Logger.log("Found "+cas[j]+" in 2 "+allValues[1][k][cols[0]]+" "+allValues[1][k][cols[0]+1]);
             range[row+3][0] = Math.round(allValues[1][k][cols[0]+1]);
             found = true;
           }
         }
       }
-      if (!found) { Logger.log(cas[j]+" wasn't found in "+allTargets[1].getSheetName()); range[row+3][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[1].getSheetName());*/ range[row+3][0]=0; }
       found = false;
       for (k = 0; k < allValues[2].length && !found; k++) { 
         if ((allValues[2][k] == undefined || allValues[2][k][0] == '' || allValues[2][k][0] == undefined)
@@ -141,13 +139,13 @@ function axcessa() {
         }
         if (allValues[2][k] != undefined && allValues[2][k][0] != '' && allValues[2][k][0] != 'Name') { 
           if (allValues[2][k][0].toLowerCase() == cas[j].toLowerCase()) { 
-            Logger.log("Found "+cas[j]+" in 3 "+allValues[2][k][cols[1]]+" "+allValues[2][k][cols[1]+1]);
+            //Logger.log("Found "+cas[j]+" in 3 "+allValues[2][k][cols[1]]+" "+allValues[2][k][cols[1]+1]);
             range[row+5][0] = Math.round(allValues[2][k][cols[1]+1]);
             found = true;
           }
         }
       }
-      if (!found) { Logger.log(cas[j]+" wasn't found in "+allTargets[2].getSheetName()); range[row+5][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[2].getSheetName());*/ range[row+5][0]=0; }
       found = false;
       for (k = 0; k < allValues[3].length && !found; k++) { 
         if ((allValues[3][k] == undefined || allValues[3][k][0] == '' || allValues[3][k][0] == undefined)
@@ -157,7 +155,7 @@ function axcessa() {
         }
         if (allValues[3][k] != undefined && allValues[3][k][0] != '' && allValues[3][k][0] != 'Name') { 
           if (allValues[3][k][0].toLowerCase() == cas[j].toLowerCase()) { 
-            Logger.log("Found "+cas[j]+" in 4 "+allValues[3][k][cols[2]]);
+            //Logger.log("Found "+cas[j]+" in 4 "+allValues[3][k][cols[2]]);
             if (allValues[3][k][1] == 0 && acc[2] != 'None') { 
               accValue += Math.round(parseInt(allValues[3][k][acc[2]]));
               range[row+2][0] = 'N/A';
@@ -175,7 +173,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { Logger.log(cas[j]+" wasn't found in "+allTargets[3].getSheetName()); range[row+2][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[3].getSheetName());*/ range[row+2][0]=0; }
       found = false;
       for (k = 0; k < allValues[4].length && !found; k++) { 
         if ((allValues[4][k] == undefined || allValues[4][k][0] == '' || allValues[4][k][0] == undefined)
@@ -185,7 +183,7 @@ function axcessa() {
         }
         if (allValues[4][k] != undefined && allValues[4][k][0] != '' && allValues[4][k][0] != 'Name') { 
           if (allValues[4][k][0].toLowerCase() == cas[j].toLowerCase()) { 
-            Logger.log("Found "+cas[j]+" in 5 "+allValues[4][k][cols[3]]);
+            //Logger.log("Found "+cas[j]+" in 5 "+allValues[4][k][cols[3]]);
             if (allValues[4][k][1] == 0 && acc[3] != 'None') { 
               accValue += Math.round(parseInt(allValues[4][k][acc[3]]));
               range[row+4][0] = 'N/A';
@@ -204,8 +202,8 @@ function axcessa() {
           }
         }
       }
-      if (!found) { Logger.log(cas[j]+" wasn't found in "+allTargets[4].getSheetName()); range[row+4][0]=0; }
-      Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[4].getSheetName());*/ range[row+4][0]=0; }
+      //Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
       range[row+6][0] = accValue;
     }
     for (j = 0; j < formulas.length; j++) { 
