@@ -123,10 +123,13 @@ function rank(){
   first=name[0];
   first=first[0].toUpperCase() + first.substring(1);
   if(email=="marko@schomp.com"){first="Mr. Osborne";}
+  if(email=="jeffe@schomp.com"){first="Mr. Edgell";}
   var d=new Date();
   var timestamp = d.toLocaleTimeString();
-  timestamp=timestamp.split(" MDT");
-  timestamp=timestamp[0];
+  timestamp = timestamp.split(' MDT')[0];
+  timestamp = timestamp.split(' MST')[0];
+  timestamp = timestamp.split(':');
+  timestamp = [timestamp[0], timestamp[1]].join(':') + timestamp[2].split(' ')[1];
   sheet.getRange("L7:M8").setValues([[timestamp,d],["Last Sort By:",check[2][0]]]);
   ss.toast('The list has successfully updated! Have a great rest of your day, '+first+'!', 'Success!', 7);
 }
