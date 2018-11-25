@@ -1,7 +1,6 @@
 function aStats(sheet_name,ca,type,x) {
   //Created By Kennen Lawrence
   //Version 3.1
-  //sheet_name="Team Jeff/Anna";ca="maxMin";type="Videos";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);
   var rows;var name;var row;var range;var value="";;var points=0;

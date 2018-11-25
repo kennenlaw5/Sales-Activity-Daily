@@ -14,10 +14,10 @@ function robb() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Robb"));
 }
-function anna() {
+function portfolio() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Anna"));
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Portfolio"));
 }
 function mark() {
   //Created By Kennen Lawrence

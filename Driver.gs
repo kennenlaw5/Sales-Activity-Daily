@@ -9,13 +9,13 @@ function teamRows (sheet_name) {
   else if (sheet_name == 'Team Robb') {
     return [3, 37, 71, 105, 139];
   }
-  else if (sheet_name == 'Team Anna') {
+  else if (sheet_name == 'Team Dean') {
     return [3, 37, 71, 105, 139, 173];
   }
   else if (sheet_name == 'Team Seth') {
     return [3, 37, 71, 105, 139, 173, 207];
   }
-  else if (sheet_name == 'Team Dean') {
+  else if (sheet_name == 'Team Portfolio') {
     return [3, 37, 71, 105];
   }
 }
@@ -31,13 +31,13 @@ function teamNames (sheet_name) {
   else if (sheet_name == 'Team Robb') {
     return ['Agye', 'Kathy', 'Castro', 'Conner', 'Mo'];
   }
-  else if (sheet_name == 'Team Anna') {
+  else if (sheet_name == 'Team Deab') {
     return ['Sam', 'Connor', 'Ace', 'Andrew', 'Tina', 'Wil'];
   }
   else if (sheet_name == 'Team Seth') {
     return ['Jeff H', 'Chuck', 'Chris L', 'Toby', 'Marlowe', 'Patrick S', 'Alex D'];
   }
-  else if (sheet_name == 'Team Dean') {
+  else if (sheet_name == 'Team Portfolio') {
     return ['Tim G', 'Josh', 'Fika', 'Brian'];
   }
 }
@@ -53,20 +53,20 @@ function axcessaNames (sheet_name) {
   else if (sheet_name == 'Team Robb') {
     return ['Agymang Spencer', 'Kathy Powell', 'Chris Castro', 'Conner Graves', 'Mohammed Kayeni'];
   }
-  else if (sheet_name == 'Team Anna') {
+  else if (sheet_name == 'Team Dean') {
     return ['Sam Nejad', 'Connor Hanlon', 'Ace Taylor-Brown', 'Andrew Sapoznik', 'Tina Watson', 'Wil Lemon'];
   }
   else if (sheet_name == 'Team Seth') {
     return ['Jeffrey Hanson', 'Chuck Northrup', 'Christopher Leirer', 'Toby Hesketh-Tutton', 'Marlowe Jones', 'Patrick Stenson', 'Alexander Duquette'];
   }
-  else if (sheet_name == 'Team Dean') {
+  else if (sheet_name == 'Team Portfolio') {
     return ['Tim Green', 'Joshua Ackerman', 'Fika Host', 'Brian Neal'];
   }
 }
 
 function viewTeams (type) {
   //Created By Kennen Lawrence
-  var names = ['Team Jeff', 'Team Ben', 'Team Robb', 'Team Anna', 'Team Seth', 'Team Dean'];
+  var names = ['Team Jeff', 'Team Ben', 'Team Robb', 'Team Dean', 'Team Seth', 'Team Portfolio'];
   if (type == 'counts') { return [names]; }
   return names;
 }
