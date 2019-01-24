@@ -31,7 +31,7 @@ function teamNames (sheet_name) {
   else if (sheet_name == 'Team Robb') {
     return ['Agye', 'Kathy', 'Castro', 'Conner', 'Mo'];
   }
-  else if (sheet_name == 'Team Deab') {
+  else if (sheet_name == 'Team Dean') {
     return ['Sam', 'Connor', 'Ace', 'Andrew', 'Tina', 'Wil'];
   }
   else if (sheet_name == 'Team Seth') {

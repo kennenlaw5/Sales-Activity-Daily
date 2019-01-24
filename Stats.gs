@@ -14,7 +14,7 @@ function aStats(sheet_name,ca,type,x) {
   name=teamNames(sheet_name);
   range=sheet.getRange(3,3,parseInt(sheet.getLastRow())-2,parseInt(sheet.getLastColumn())-2).getValues();
   for(var l=0;l<rows.length;l++){
-    if(ca!="TEAM" && ca!="maxMin"){
+    if(ca != "TEAM" && ca != "maxMin"){
       for(var i=0;i<name.length;i++){
         if(name[i]==ca){row=parseInt(rows[i])-2;i=name.length;}
       }
@@ -93,7 +93,7 @@ function maxMin(sheet_name,type,x){
   //Version 2.0
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);
-  var name;var rows;var team;
+  var name, rows, team;
   var lead="";var leadpts=-1;var testpts;var pts="";var tailpts=9999;var tail="";var opp="";var tie=[];var t="0";
   rows=teamRows(sheet_name);
   name=teamNames(sheet_name);
