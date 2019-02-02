@@ -39,13 +39,13 @@ function reset() {
   var teams = viewTeams().length;
   sheet.getRange(2, 2, teams).setValue('---');
   sheet.getRange(2, 9, teams).setValue('---');
-  ss.getSheetByName("1v1").hideSheet();
+  ss.getSheetByName('1v1').hideSheet();
 }
 
 function all() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("Team Stats");
+  var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
   var preRange = sheet.getRange(2, 2, teams, 8);
   var range = preRange.getFormulas();
@@ -72,7 +72,7 @@ function refresh() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
-  var range = sheet.getRange(teams + 2, 1, 2)
+  var range = sheet.getRange(teams + 3, 1, 2)
   var values = range.getValues();
   values[0][0]++;
   values[1][0]++;
@@ -86,10 +86,10 @@ function refreshpts() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
-  var range = sheet.getRange(teams + 3, 1);
+  var range = sheet.getRange(teams + 4, 1);
   var value = range.getValue();
   value++;
-  range.setValue(range);
+  range.setValue(value);
   emailPopUp('Points refreshed successfully','Points Refreshed');
 }
 
