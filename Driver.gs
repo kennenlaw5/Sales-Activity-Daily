@@ -15,9 +15,6 @@ function teamRows (sheet_name) {
   else if (sheet_name == 'Team Liz') {
     return [3, 37, 71, 105, 139, 173, 207, 241];
   }
-  else if (sheet_name == 'Team Portfolio') {
-    return [3, 37, 71, 105];
-  }
 }
 
 function teamNames (sheet_name) {
@@ -36,9 +33,6 @@ function teamNames (sheet_name) {
   }
   else if (sheet_name == 'Team Liz') {
     return ['Jeff H', 'Chuck', 'Chris L', 'Marlowe', 'Alex D', 'Patrick S', 'Toby', 'Tina'];
-  }
-  else if (sheet_name == 'Team Portfolio') {
-    return ['Tim G', 'Josh', 'Fika', 'Brian'];
   }
 }
 
@@ -59,14 +53,11 @@ function axcessaNames (sheet_name) {
   else if (sheet_name == 'Team Liz') {
     return ['Jeffrey Hanson', 'Chuck Northrup', 'Christopher Leirer', 'Marlowe Jones', 'Alexander Duquette', 'Patrick Stenson', 'Toby Hesketh-Tutton', 'Tina Watson'];
   }
-  else if (sheet_name == 'Team Portfolio') {
-    return ['Tim Green', 'Joshua Ackerman', 'Fika Host', 'Brian Neal'];
-  }
 }
 
 function viewTeams (type) {
   //Created By Kennen Lawrence
-  var names = ['Team Jeff', 'Team Ben', 'Team Robb', 'Team Dean', 'Team Liz', 'Team Portfolio'];
+  var names = ['Team Jeff', 'Team Ben', 'Team Robb', 'Team Dean', 'Team Liz'];
   if (type == 'counts') { return [names]; }
   return names;
 }

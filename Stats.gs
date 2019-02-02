@@ -3,7 +3,9 @@ function aStats(sheet_name,ca,type,x) {
   //Version 3.1
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);
-  var rows;var name;var row;var range;var value="";;var points=0;
+  var rows, name, row, range;
+  var value = '';
+  var points = 0;
   //Point types
   var acc=0;var testi=0;var vid=0;var max=0;var adv=0;
   //Other types
