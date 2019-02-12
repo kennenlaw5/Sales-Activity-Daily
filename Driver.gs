@@ -1,63 +1,63 @@
 function teamRows (sheet_name) {
   //Created By Kennen Lawrence
-  if (sheet_name == 'Team Jeff') {
-    return [3, 37, 71, 105];
+  if (sheet_name == 'Team Merrie') {
+    return [3, 37, 71, 105, 139, 173, 207];
   }
   else if (sheet_name == 'Team Ben') {
-    return [3, 37, 71, 105, 139];
+    return [3, 37, 71, 105, 139, 173, 207];
   }
   else if (sheet_name == 'Team Robb') {
-    return [3, 37, 71, 105, 139];
+    return [3, 37, 71, 105, 139, 173, 207];
   }
-  else if (sheet_name == 'Team Dean') {
-    return [3, 37, 71, 105, 139];
+  else if (sheet_name == 'Team Josh') {
+    return [3, 37, 71, 105, 139, 173];
   }
   else if (sheet_name == 'Team Liz') {
-    return [3, 37, 71, 105, 139, 173, 207, 241];
+    return [3, 37, 71, 105, 139, 173, 207];
   }
 }
 
 function teamNames (sheet_name) {
   //Created By Kennen Lawrence
-  if (sheet_name == 'Team Jeff') {
-    return ['Omar', 'Ian', 'Demitri', 'Michael'];
+  if (sheet_name == 'Team Merrie') {
+    return ['Castro', 'Ian', 'Demitri', 'Brian', 'Jim', 'Robin', 'Dan'];
   }
   else if (sheet_name == 'Team Ben') {
-    return ['Patrick Q', 'Troy', 'Damir', 'James', 'Shahin'];
+    return ['Patrick Q', 'Marlowe', 'Sam', 'James', 'Shahin', 'Jeanne', 'Adam'];
   }
   else if (sheet_name == 'Team Robb') {
-    return ['Castro', 'Conner', 'Mo', 'Jason', 'Robert'];
+    return ['Jeff H', 'Conner', 'Mo', 'Jason', 'Robert', 'Troy', 'Stephanie'];
   }
-  else if (sheet_name == 'Team Dean') {
-    return ['Sam', 'Connor', 'Ace', 'Andrew', 'Jeanne'];
+  else if (sheet_name == 'Team Josh') {
+    return ['Alex D', 'Michael B', 'Ace', 'Andrew', 'Joey'];
   }
   else if (sheet_name == 'Team Liz') {
-    return ['Jeff H', 'Chuck', 'Chris L', 'Marlowe', 'Alex D', 'Patrick S', 'Toby', 'Tina'];
+    return ['Chuck', 'Chris L', 'Damir', 'Michael M', 'Patrick S', 'Toby', 'Tina'];
   }
 }
 
 function axcessaNames (sheet_name) {
   //Created By Kennen Lawrence
-  if (sheet_name == 'Team Jeff') {
-    return ['Omar Johnson', 'Ian Hudgens', 'Demitri Gavito', 'Michael Barrett'];
+  if (sheet_name == 'Team Merrie') {
+    return ['Chris Castro', 'Ian Hudgens', 'Demitri Gavito', 'Brian Neal', 'Jim Merrell', 'Robin Windhager', 'Dan Fink'];
   }
   else if (sheet_name == 'Team Ben') {
-    return ['Patrick Quinlan', 'Troy Roth', 'Damir Memisevic', 'James Pryor', 'Shahin Nia'];
+    return ['Patrick Quinlan', 'Marlowe Jones', 'Sam Nejad', 'James Pryor', 'Shahin Nia', 'Jeanne Tal'];
   }
   else if (sheet_name == 'Team Robb') {
-    return ['Chris Castro', 'Conner Graves', 'Mohammed Kayeni', 'Jason Hovde', 'Robert Bird'];
+    return ['Jeffrey Hanson', 'Conner Graves', 'Mohammed Kayeni', 'Jason Hovde', 'Robert Bird', 'Troy Roth', 'Stephanie Reese'];
   }
-  else if (sheet_name == 'Team Dean') {
-    return ['Sam Nejad', 'Connor Hanlon', 'Ace Taylor-Brown', 'Andrew Sapoznik', 'Jeanne Tal'];
+  else if (sheet_name == 'Team Josh') {
+    return ['Alexander Duquette', 'Michael Barrett', 'Ace Taylor-Brown', 'Andrew Sapoznik', 'Joey Bernier'];
   }
   else if (sheet_name == 'Team Liz') {
-    return ['Jeffrey Hanson', 'Chuck Northrup', 'Christopher Leirer', 'Marlowe Jones', 'Alexander Duquette', 'Patrick Stenson', 'Toby Hesketh-Tutton', 'Tina Watson'];
+    return ['Chuck Northrup', 'Christopher Leirer', 'Damir Memisevic', 'Michael Meis', 'Patrick Stenson', 'Toby Hesketh-Tutton', 'Tina Watson'];
   }
 }
 
 function viewTeams (type) {
   //Created By Kennen Lawrence
-  var names = ['Team Jeff', 'Team Ben', 'Team Robb', 'Team Dean', 'Team Liz'];
+  var names = ['Team Merrie', 'Team Ben', 'Team Robb', 'Team Josh', 'Team Liz'];
   if (type == 'counts') { return [names]; }
   return names;
 }

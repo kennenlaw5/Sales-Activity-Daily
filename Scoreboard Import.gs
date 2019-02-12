@@ -4,7 +4,7 @@ function scoreboard() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var ui = SpreadsheetApp.getUi();
   var master = ss.getSheetByName('SBMaster');
-  var primary = ss.getSheetByName('Team Jeff');
+  var primary = ss.getSheetByName('Team Merrie');
   var dates = primary.getRange(2, 1, 1, primary.getLastColumn()).getDisplayValues();
   var sheet_name = '';
   var col = 0;

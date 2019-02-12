@@ -2,7 +2,7 @@
 function jeff() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Jeff'));
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Merrie'));
 }
 function ben() {
   //Created By Kennen Lawrence
@@ -27,5 +27,5 @@ function seth() {
 function dean() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Dean'));
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Josh'));
 }

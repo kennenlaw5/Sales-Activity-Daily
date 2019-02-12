@@ -1,18 +1,18 @@
 function onOpen() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Stats"));
-  ss.getSheetByName("Team Stats").getRange("B2").getValue();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName("CA Ranking"));
-  ss.getSheetByName("Team Jeff").getRange("C4").getValue();
-  SpreadsheetApp.setActiveSheet(ss.getSheetByName("Team Stats"));
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Stats'));
+  ss.getSheetByName('Team Stats').getRange('B2').getValue();
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName('CA Ranking'));
+  ss.getSheetByName('Team Merrie').getRange('C4').getValue();
+  SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Stats'));
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Utilities').addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addItem('Reset Statistics','reset')
   .addItem('Refresh CA Ranking','rank').addItem('Import Scoreboard','scoreboard').addItem('Axcessa Import','axcessa').addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
-  ss.getSheetByName("1v1").hideSheet();
-  ss.getSheetByName("SBMaster").hideSheet();
+  ss.getSheetByName('1v1').hideSheet();
+  ss.getSheetByName('SBMaster').hideSheet();
   SpreadsheetApp.flush();
   ss.toast(message, title);
 }
@@ -96,7 +96,7 @@ function refreshpts() {
 function team_lead(range) {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("Team Stats");
+  var sheet = ss.getSheetByName('Team Stats');
   var max = 0;
   var names = viewTeams();
   var team = '';
@@ -129,7 +129,7 @@ function team_lead(range) {
 function team_tail(range) {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("Team Stats");
+  var sheet = ss.getSheetByName('Team Stats');
   var min = 9000;
   var names = viewTeams();
   var team;
@@ -171,7 +171,7 @@ function emailPopUp(message, title) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var email = Session.getActiveUser().getEmail();
   var name, first;
-  name = email.split("@schomp.com");
+  name = email.split('@');
   name = name[0];
   name = name.split('.');
   first = name[0];
@@ -185,9 +185,9 @@ function getName() {
   //Version 1.0
   var email = Session.getActiveUser().getEmail();
   var name, first, last;
-  name = email.split("@schomp.com");
+  name = email.split('@');
   name = name[0];
-  name = name.split(".");
+  name = name.split('.');
   first = name[0];
   last = name[1];
   first = first[0].toUpperCase() + first.substring(1);
