@@ -96,7 +96,7 @@ function axcessa() {
     cas = axcessaNames(sheet_name);
     range = sheet.getRange(1, col, sheet.getLastRow(), 1).getValues();
     formulas=sheet.getRange(1, col, sheet.getLastRow(), 1).getFormulas();
-    for (j = 0; j < rows.length; j++) { 
+    for (j = 0; j < rows.length; j++) {
       accValue = 0;
       found = false;
       row = parseInt(rows[j]) + 20;
