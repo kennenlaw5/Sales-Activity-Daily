@@ -62,9 +62,9 @@ function scoreboard() {
     sheet = ss.getSheetByName(sheet_name);
     rows = teamRows(sheet_name);
     range = sheet.getRange(1, col, sheet.getLastRow(), 1).getValues();
-    formulas=sheet.getRange(1, col, sheet.getLastRow(), 1).getFormulas();
+    formulas = sheet.getRange(1, col, sheet.getLastRow(), 1).getFormulas();
     for(var j = 0; j < formulas.length; j++) {
-      if (formulas[j][0] != "") { range[j][0]=formulas[j][0]; }
+      if (formulas[j][0] != '') { range[j][0] = formulas[j][0]; }
     }
     for(j = 0; j < rows.length; j++) {
       sbDate = sbInput.getResponseText();
