@@ -20,19 +20,19 @@ function teamRows (sheet_name) {
 function teamNames (sheet_name) {
   //Created By Kennen Lawrence
   if (sheet_name == 'Team Merrie') {
-    return ['Castro', 'Ian', 'Demitri', 'Jim', 'Robin', 'Dan'];
+    return ['Chris C', 'Ian H', 'Demitri G', 'Jim M', 'Robin W', 'Dan F'];
   }
   else if (sheet_name == 'Team Ben') {
-    return ['Patrick Q', 'Marlowe', 'Sam', 'James', 'Shahin', 'Jeanne', 'Adam E'];
+    return ['Patrick Q', 'Marlowe J', 'Sam N', 'James P', 'Shahin N', 'Jeanne T', 'Adam E'];
   }
   else if (sheet_name == 'Team Robb') {
-    return ['Jeff H', 'Conner', 'Mo', 'Jason', 'Troy', 'Stephanie'];
+    return ['Jeff H', 'Conner G', 'Mo K', 'Jason H', 'Troy R', 'Stephanie R'];
   }
   else if (sheet_name == 'Team Josh') {
-    return ['Alex D', 'Michael B', 'Ace', 'Andrew', 'Adam M'];
+    return ['Alex D', 'Michael B', 'Ace T', 'Andrew S', 'Adam M'];
   }
   else if (sheet_name == 'Team Liz') {
-    return ['Chuck', 'Chris L', 'Damir', 'Michael M', 'Patrick S', 'Toby', 'Tina'];
+    return ['Chuck N', 'Chris L', 'Damir M', 'Michael M', 'Patrick S', 'Toby H T', 'Tina W'];
   }
 }
 

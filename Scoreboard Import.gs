@@ -69,12 +69,12 @@ function scoreboard() {
     for(j = 0; j < rows.length; j++) {
       sbDate = sbInput.getResponseText();
       row = parseInt(rows[j]) + 15;
-      range[row][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Y,4,FALSE)";
-      range[row+1][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Y,14,FALSE)";
-      range[row+2][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Y,20,FALSE)";
-      range[row+3][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Y,8,FALSE)";
+      range[row][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,4,FALSE)";
+      range[row+1][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,14,FALSE)";
+      range[row+2][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,21,FALSE)";
+      range[row+3][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,8,FALSE)";
       range[row+4][0] = "=SUM(VLOOKUP($A" + rows[j] + ",'SB" + sbDate +
-        "'!$A$4:$Y,22,FALSE),VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Y,24,FALSE))";
+        "'!$A$4:$Z,24,FALSE),VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,26,FALSE))";
     }
     sheet.getRange(1, col, sheet.getLastRow(), 1).setValues(range);
   }
@@ -82,11 +82,12 @@ function scoreboard() {
   hardPrint(name);
   ss.toast('Scoreboard import complete!', 'Complete!');
 }
+
 function hardPrint(name) {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(name);
-//  var sheet=ss.getActiveSheet();
+//  var sheet = ss.getActiveSheet();
   var values = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).getDisplayValues();
   sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn()).setValues(values);
 }
