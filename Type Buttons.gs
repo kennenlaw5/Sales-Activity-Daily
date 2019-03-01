@@ -1,41 +1,41 @@
 //Created By Kennen Lawrence
-function maxdig(){
+function apptsShown(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("I2:I7");
+  var range = sheet.getRange('H2:H7');
   sheet.getRange("B2:B7").setValue('TEAM');
-  range.setValue('Max Digital');
+  range.setValue('Appts/Shown');
 }
-function vid(){
+function accAvg(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("I2:I7");
+  var range = sheet.getRange('H2:H7');
   sheet.getRange("B2:B7").setValue('TEAM');
-  range.setValue('Videos');
+  range.setValue('Acc Avg.');
 }
-function testi(){
+function contactedInt(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("I2:I7");
+  var range = sheet.getRange('H2:H7');
   sheet.getRange("B2:B7").setValue('TEAM');
-  range.setValue('Testimonials');
+  range.setValue('Contacted Int');
 }
-function acc(){
+function videosPerLead(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("I2:I7");
+  var range = sheet.getRange('H2:H7');
   sheet.getRange("B2:B7").setValue('TEAM');
-  range.setValue('Accolades');
+  range.setValue('Videos/Lead');
 }
-function adv(){
+function allPoints(){
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName("Team Stats");
-  var range = sheet.getRange("I2:I7");
+  var range = sheet.getRange('H2:H7');
   sheet.getRange("B2:B7").setValue('TEAM');
-  range.setValue('Advantastars');
+  range.setValue('All');
 }

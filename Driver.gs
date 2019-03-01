@@ -1,19 +1,19 @@
 function teamRows (sheet_name) {
   //Created By Kennen Lawrence
   if (sheet_name == 'Team Merrie') {
-    return [3, 37, 71, 105, 139, 173];
+    return [3, 29, 55, 81, 107, 133];
   }
   else if (sheet_name == 'Team Ben') {
-    return [3, 37, 71, 105, 139, 173, 207];
+    return [3, 29, 55, 81, 107, 133, 159];
   }
   else if (sheet_name == 'Team Robb') {
-    return [3, 37, 71, 105, 139, 173];
+    return [3, 29, 55, 81, 107, 133];
   }
   else if (sheet_name == 'Team Josh') {
-    return [3, 37, 71, 105, 139];
+    return [3, 29, 55, 81, 107];
   }
   else if (sheet_name == 'Team Liz') {
-    return [3, 37, 71, 105, 139, 173, 207];
+    return [3, 29, 55, 81, 107, 133, 159];
   }
 }
 
@@ -64,18 +64,22 @@ function viewTeams (type) {
 
 function dataRows (request) {
   //Created By Kennen Lawrence
-  var rowOrder = ['emails','texts','3min','total calls','accolades','testimonials','advantastart','max digital','videos','fresh','phone'
-                  ,'internet','appts','mtdAppts','podium','closing ratio','internet closing','phone closing','fresh closing','opent events'
-                  ,'new','used','new product','new pvr','used product','used pvr','accessories','bulletin','1v1','help','tasks'
-                  ,'follow through','blank'];
-  var view, i, start, end;
-  var found = false;
-  if (request == 'activity') {
-    start = 'emails';
-    end = 'mtdAppts';
-    for (i = 0; i < rowOrder.length; i++) {
-      if (found && rowOrder[i] == end) { found = false; }
-    }
-  }
-  return rowOrder;
+  var rowOrder = ['emails', 'texts', 'fresh', 'phone', 'internet', 'videos', 'videos/lead', 'contacted'
+                  , 'appts', 'mtd appts', 'podium', 'appts shown', 'closing ratio', 'internet closing'
+                  , 'phone closing', 'fresh closing', 'opent events', 'new', 'used', 'new product'
+                  , 'new pvr', 'used product', 'used pvr', 'accessories', 'avg accessories'];
+  
+  if (request == undefined) { return rowOrder; }
+  
+  if (typeof request === 'number') { return rowOrder[request]; }
+  
+  rowOrder = rowOrder.indexOf(request.toLowerCase());
+  
+  if (rowOrder === -1) { throw 'Could not find "' + request + '" in dataRows()'; }
+  
+  return rowOrder + 1;
+}
+
+function test() {
+  Logger.log(dataRows('fresh'));
 }

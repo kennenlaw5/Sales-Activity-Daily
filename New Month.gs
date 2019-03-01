@@ -2,25 +2,26 @@ function newMonth() {
   //Created By Kennen Lawrence
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var teams = viewTeams();
-  var sheet, range, rows, row;
+  var sheet, range, rows, row, formulas;
   
   for (var i = 0; i < teams.length; i++) {
     sheet = ss.getSheetByName(teams[i]);
-    range = sheet.getRange(2, 3, sheet.getLastRow()-1, sheet.getLastColumn()-2).getFormulas();
+    range = sheet.getRange(2, 3, sheet.getLastRow()-1, sheet.getLastColumn()-2)
+    formulas = range.getFormulas();
     rows = teamRows(teams[i]);
     
     for (var l = 0; l < rows.length; l++) {
       row = parseInt(parseInt(rows[l]) + 13);
       for (var j = 0; j < 6; j++) {
-        for (var k = 0; k < range[row].length; k++) {
-          range[row][k] = '';
+        for (var k = 0; k < formulas[row].length; k++) {
+          formulas[row][k] = '';
         }
         row ++;
       }
     }
     
-    sheet.getRange(2, 3, sheet.getLastRow()-1, sheet.getLastColumn()-2).setValues(range);
-    sheet.getRange(2, 3, sheet.getLastRow()-1, sheet.getLastColumn()-2).clearNote();
+    range.setValues(formulas);
+    range.clearNote();
   }
   
   sbClear();

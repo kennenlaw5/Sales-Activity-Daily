@@ -1,4 +1,144 @@
-function aStats(sheet_name, ca, type, x) {
+function aStats (sheet_name, ca, type, x) {
+  //Created By Kennen Lawrence
+  //Version 4.0
+  
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(sheet_name);
+  
+  /* Point types: [
+  0 = Appointment to Show Ratio (If >= 50% = 5 points; else if < 50% = 1 point),
+  1 = Accessory Average (= 1 point per thousand average),
+  2 = contacted internet leads (= 1 point per lead contacted),
+  3 = Vehicle Video to lead ratio (If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points),
+  ]*/
+  var appt_to_show = 0, acc_avg = 1, contacted_leads = 2, video_to_lead = 3;
+  var indv_points = [0, 0, 0, 0];
+  
+  /* Other types: [
+  0 = Emails,
+  1 = Texts,
+  2 = Fresh Leads,
+  3 = Phone Leads,
+  4 = Internet Leads,
+  ]*/
+  var emails = 0, texts = 1, fresh = 2, phone = 3, internet = 4;
+  var indv_other = [0, 0, 0, 0, 0];
+  
+  var rows = teamRows(sheet_name);
+  var name = teamNames(sheet_name);
+  var range = sheet.getRange(3, 3, parseInt(sheet.getLastRow()) - 2, parseInt(sheet.getLastColumn()) - 2).getValues();
+  var row;
+  var maxMin = [];
+  
+  for (var l = 0; l < rows.length; l++) {
+    
+    if (ca != 'TEAM' && ca != 'maxMin') {
+      
+      for (var i = 0; i < name.length; i++) {
+        if (name[i].toLowerCase() == ca.toLowerCase()) { row = parseInt(rows[i]) - 3; i = name.length; }
+      }
+      
+      l = rows.length;
+    }
+    else { row = parseInt(rows[l]) - 3; }
+    
+    for (var j = 0; j < range[0].length; j++) {
+      
+      var data = range[row + dataRows('emails')][j];
+      if (typeof data === 'number') {
+        indv_other[emails] += parseInt(data);
+      }
+      
+      data = range[row + dataRows('texts')][j];
+      if (typeof data === 'number') {
+        indv_other[texts] += parseInt(data);
+      }
+      
+      data = range[row + dataRows('phone')][j];
+      if (typeof data === 'number') {
+        indv_other[phone] += parseInt(data);
+      }
+      
+      data = range[row + dataRows('fresh')][j];
+      if (typeof data === 'number') {
+        indv_other[fresh] += parseInt(data);
+      }
+      
+      data = range[row + dataRows('internet')][j];
+      if (typeof data === 'number') {
+        indv_other[internet] += parseInt(data);
+      }
+      
+      
+      //Point accumulation section
+      data = range[row + dataRows('appts shown')][j];
+      if (typeof data === 'number') {
+        // Rule for point: If >= 50% = 5 points; else if < 50% = 1 point
+        indv_points[appt_to_show] += data >= 0.5 ? 5 : 1;
+      }
+      
+      data = range[row + dataRows('avg accessories')][j];
+      if (typeof data === 'number') {
+        //Accessory Average (= 1 point per thousand average)
+        indv_points[acc_avg] += parseInt(data / 1000, 10);
+      }
+      
+      data = range[row + dataRows('contacted')][j];
+      if (typeof data === 'number') {
+        //contacted internet leads (= 1 point per lead contacted),
+        indv_points[contacted_leads] += parseInt(data);
+      }
+      
+      data = range[row + dataRows('videos/lead')][j];
+      if (typeof data === 'number') {
+        //If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points
+        if (data >= 0.7) { data = 5; }
+        else if (data < 0.7 && data >= 0.5) { data = 2; }
+        else if (data < 0.5 && data >= 0.1) { data = 1; }
+        
+        indv_points[video_to_lead] += data;
+      }
+    }
+    
+    if (ca == 'maxMin') {
+      if (type == 'All') { maxMin[l] = [name[l], indv_points[appt_to_show] + indv_points[acc_avg] + indv_points[contacted_leads] + indv_points[video_to_lead]]; }
+      else if (type == 'Appts/Shown') { maxMin[l] = [name[l], indv_points[appt_to_show]]; }
+      else if (type == 'Acc Avg.') { maxMin[l] = [name[l], indv_points[acc_avg]]; }
+      else if (type == 'Contacted Int') { maxMin[l] = [name[l], indv_points[contacted_leads]]; }
+      else if (type == 'Videos/Lead') { maxMin[l] = [name[l], indv_points[video_to_lead]]; }
+      
+      //Reset All Values for next client advisor
+      indv_points[appt_to_show]    = 0;
+      indv_points[acc_avg]         = 0;
+      indv_points[contacted_leads] = 0;
+      indv_points[video_to_lead]   = 0;
+    }
+  }
+  
+  var points = 0;
+  if (type == 'main') {
+    return [indv_other];
+  }
+  else if (type == 'ranking') {
+    for (var m in indv_points) { points += indv_points[m]; }
+    return [ca, sheet_name, points].concat(indv_points);
+  }
+  else if (ca == 'maxMin') {
+    return maxMin;
+  }
+  else if (type == 'Appts/Shown') { return indv_points[appt_to_show]; }
+  else if (type == 'Acc Avg.') { return indv_points[acc_avg]; }
+  else if (type == 'Contacted Int') { return indv_points[contacted_leads]; }
+  else if (type == 'Videos/Lead') { return indv_points[video_to_lead]; }
+  else if (type == 'All') {
+    for (var m in indv_points) { points += indv_points[m]; }
+    return points;
+  }
+  else if (type == 'rank') { return indv_points; }
+}
+
+//Starting from scratch due to excessive changes to sheet dynamic
+/*function aStats(sheet_name, ca, type, x) {
   //Created By Kennen Lawrence
   //Version 3.1
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -87,11 +227,12 @@ function aStats(sheet_name, ca, type, x) {
     for (var m in options) { points += options[m]; }
     return points;
   } else if (type == 'rank') { return [vid, acc, testi, max, adv]; }
-}
+}*/
 
 function maxMin(sheet_name, type, x) {
   //Created By Kennen Lawrence
   //Version 2.0
+  
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);
   var name, rows, team, testpts;
@@ -106,10 +247,13 @@ function maxMin(sheet_name, type, x) {
   rows = teamRows(sheet_name);
   name = teamNames(sheet_name);
   team = aStats(sheet_name, 'maxMin', type);
+  
   for (var i = 0; i < name.length; i++) {
     testpts = parseInt(team[i][1]);
+    
     if (testpts > leadpts && testpts != 0) { leadpts = testpts; lead = team[i][0]; t = 0; }
     else if (testpts == leadpts && testpts != 0) { if (t == 0) { tie[t] = lead; t += 1; } tie[t] = team[i][0]; t += 1; lead = 'TIE'; }
+    
     testpts = 0;
   }
   
@@ -122,8 +266,10 @@ function maxMin(sheet_name, type, x) {
   tie = []; t = 0;
   for (i = 0; i < name.length; i++) {
     testpts = parseInt(team[i][1]);
+    
     if (testpts < tailpts) { tailpts = testpts; tail = team[i][0]; t = 0; }
     else if (testpts == tailpts) { if (t == 0) { tie[t] = tail; t += 1; } tie[t] = team[i][0]; t += 1; tail = 'TIE'; }
+    
     testpts = 0;
   }
   if (tail == 'TIE') {

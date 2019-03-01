@@ -38,7 +38,7 @@ function reset() {
   var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
   sheet.getRange(2, 2, teams).setValue('---');
-  sheet.getRange(2, 9, teams).setValue('---');
+  sheet.getRange(2, 8, teams).setValue('---');
   ss.getSheetByName('1v1').hideSheet();
 }
 
@@ -47,11 +47,11 @@ function all() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
-  var preRange = sheet.getRange(2, 2, teams, 8);
+  var preRange = sheet.getRange(2, 2, teams, 7);
   var range = preRange.getFormulas();
   for (var i = 0; i < range.length; i++) {
     range[i][0]='TEAM';
-    range[i][7]='All';
+    range[i][6]='All';
   }
   preRange.setValues(range);
   emailPopUp('All teams and points shown successfully','All stats shown!');
@@ -63,7 +63,7 @@ function leaders() {
   var sheet = ss.getSheetByName('Team Stats');
   var teams = viewTeams().length;
   var range1 = sheet.getRange(2, 2, teams).setValue('---');
-  var range2 = sheet.getRange(2, 9, teams).setValue('All');
+  var range2 = sheet.getRange(2, 8, teams).setValue('All');
 }
 
 function refresh() {

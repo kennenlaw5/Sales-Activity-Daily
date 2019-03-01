@@ -99,7 +99,7 @@ function axcessa() {
     for (j = 0; j < rows.length; j++) {
       accValue = 0;
       found = false;
-      row = parseInt(rows[j]) + 20;
+      row = parseInt(rows[j]);
       for (var k = 0; k < allValues[0].length && !found; k++) {
         if ((allValues[0][k] == undefined || allValues[0][k][0] == '' || allValues[0][k][0] == undefined)
             && (allValues[0][k+1] == undefined || allValues[0][k+1][0] == '' || allValues[0][k+1][0] == undefined))
@@ -109,8 +109,8 @@ function axcessa() {
         if (allValues[0][k][0] != '' && allValues[0][k][0] != undefined && allValues[0][k][0] != 'Employee') {
           if (allValues[0][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             //Logger.log("Found "+cas[j]+" in 1 "+allValues[0][k][1]+" "+allValues[0][k][2]);
-            range[row][0] = allValues[0][k][1];
-            range[row+1][0] = allValues[0][k][2];
+            range[row + dataRows('new')][0] = allValues[0][k][1];
+            range[row + dataRows('used')][0] = allValues[0][k][2];
             found = true;
           }
         }
@@ -126,7 +126,7 @@ function axcessa() {
         if (allValues[1][k] != undefined && allValues[1][k][0] != '' && allValues[1][k][0] != 'Name') { 
           if (allValues[1][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             //Logger.log("Found "+cas[j]+" in 2 "+allValues[1][k][cols[0]]+" "+allValues[1][k][cols[0]+1]);
-            range[row+3][0] = Math.round(allValues[1][k][cols[0]+1]);
+            range[row + dataRows('new product')][0] = Math.round(allValues[1][k][cols[0]+1]);
             found = true;
           }
         }
@@ -142,7 +142,7 @@ function axcessa() {
         if (allValues[2][k] != undefined && allValues[2][k][0] != '' && allValues[2][k][0] != 'Name') { 
           if (allValues[2][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             //Logger.log("Found "+cas[j]+" in 3 "+allValues[2][k][cols[1]]+" "+allValues[2][k][cols[1]+1]);
-            range[row+5][0] = Math.round(allValues[2][k][cols[1]+1]);
+            range[row + dataRows('new pvr')][0] = Math.round(allValues[2][k][cols[1]+1]);
             found = true;
           }
         }
@@ -160,22 +160,22 @@ function axcessa() {
             //Logger.log("Found "+cas[j]+" in 4 "+allValues[3][k][cols[2]]);
             if (allValues[3][k][1] == 0 && acc[2] != 'None') { 
               accValue += Math.round(parseInt(allValues[3][k][acc[2]]));
-              range[row+2][0] = 'N/A';
+              range[row + dataRows('new product')][0] = 'N/A';
             } else if (allValues[3][k][1] == 0 && acc[2] == 'None') { 
-              range[row+2][0] = 'N/A';
+              range[row + dataRows('new product')][0] = 'N/A';
             } else if (acc[2] == 'None') { 
-              range[row+2][0] = allValues[3][k][cols[2]] / allValues[3][k][1];
-              range[row+2][0] = range[row+2][0].toFixed(1);
+              range[row + dataRows('new product')][0] = allValues[3][k][cols[2]] / allValues[3][k][1];
+              range[row + dataRows('new product')][0] = range[row + dataRows('new product')][0].toFixed(1);
             } else { 
-              range[row+2][0] = (allValues[3][k][cols[2]] - allValues[3][k][acc[2]]) / allValues[3][k][1];
-              range[row+2][0] = range[row+2][0].toFixed(1);
+              range[row + dataRows('new product')][0] = (allValues[3][k][cols[2]] - allValues[3][k][acc[2]]) / allValues[3][k][1];
+              range[row + dataRows('new product')][0] = range[row + dataRows('new product')][0].toFixed(1);
               accValue += Math.round(parseInt(allValues[3][k][acc[2]]));
             }
             found = true;
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[3].getSheetName());*/ range[row+2][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[3].getSheetName());*/ range[row + dataRows('new product')][0]=0; }
       found = false;
       for (k = 0; k < allValues[4].length && !found; k++) { 
         if ((allValues[4][k] == undefined || allValues[4][k][0] == '' || allValues[4][k][0] == undefined)
@@ -188,25 +188,25 @@ function axcessa() {
             //Logger.log("Found "+cas[j]+" in 5 "+allValues[4][k][cols[3]]);
             if (allValues[4][k][1] == 0 && acc[3] != 'None') { 
               accValue += Math.round(parseInt(allValues[4][k][acc[3]]));
-              range[row+4][0] = 'N/A';
+              range[row + dataRows('used product')][0] = 'N/A';
             }else if (allValues[4][k][1] == 0 && acc[3] == 'None') { 
-              range[row+4][0] = 'N/A';
+              range[row + dataRows('used product')][0] = 'N/A';
             }else if (acc[3] == 'None') { 
-              range[row+4][0] = allValues[4][k][cols[3]] / allValues[4][k][1];
-              range[row+4][0] = range[row+4][0].toFixed(1);
+              range[row + dataRows('used product')][0] = allValues[4][k][cols[3]] / allValues[4][k][1];
+              range[row + dataRows('used product')][0] = range[row + dataRows('used product')][0].toFixed(1);
             }
             else { 
-              range[row+4][0] = (allValues[4][k][cols[3]] - allValues[4][k][acc[3]]) / allValues[4][k][1];
-              range[row+4][0] = range[row+4][0].toFixed(1);
+              range[row + dataRows('used product')][0] = (allValues[4][k][cols[3]] - allValues[4][k][acc[3]]) / allValues[4][k][1];
+              range[row + dataRows('used product')][0] = range[row + dataRows('used product')][0].toFixed(1);
               accValue += Math.round(parseInt(allValues[4][k][acc[3]]));
             }
             found = true;
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[4].getSheetName());*/ range[row+4][0]=0; }
+      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[4].getSheetName());*/ range[row + dataRows('used product')][0] = 0; }
       //Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
-      range[row+6][0] = accValue;
+      range[row + dataRows('accessories')][0] = accValue;
     }
     for (j = 0; j < formulas.length; j++) { 
       if (formulas[j][0] != '') { range[j][0] = formulas[j][0]; }
