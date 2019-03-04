@@ -76,9 +76,10 @@ function scoreboard() {
     
     for(j = 0; j < rows.length; j++) {
       sbDate = sbInput.getResponseText();
+      row = rows[j] - 1;
       
-      range[row + dataRows('appts shown')][0] = "=AVERAGE(VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,14,FALSE)," +
-        "VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,21,FALSE))";
+      range[row + dataRows('appts shown')][0] = "=IFERROR(AVERAGE(VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,14,FALSE)," +
+        "VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,21,FALSE)),\"N/A\")";
         
       range[row + dataRows('closing ratio')][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,4,FALSE)";
       range[row + dataRows('internet closing')][0] = "=VLOOKUP($A" + rows[j] + ",'SB" + sbDate + "'!$A$4:$Z,14,FALSE)";
