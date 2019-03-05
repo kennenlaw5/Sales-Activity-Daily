@@ -126,12 +126,12 @@ function axcessa() {
         if (allValues[1][k] != undefined && allValues[1][k][0] != '' && allValues[1][k][0] != 'Name') { 
           if (allValues[1][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             //Logger.log("Found "+cas[j]+" in 2 "+allValues[1][k][cols[0]]+" "+allValues[1][k][cols[0]+1]);
-            range[row + dataRows('new product')][0] = Math.round(allValues[1][k][cols[0]+1]);
+            range[row + dataRows('new pvr')][0] = Math.round(allValues[1][k][cols[0]+1]);
             found = true;
           }
         }
       }
-      if (!found) { range[row + dataRows('new product')][0] = 0; }
+      if (!found) { range[row + dataRows('new pvr')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[2].length && !found; k++) { 
         if ((allValues[2][k] == undefined || allValues[2][k][0] == '' || allValues[2][k][0] == undefined)
@@ -142,12 +142,12 @@ function axcessa() {
         if (allValues[2][k] != undefined && allValues[2][k][0] != '' && allValues[2][k][0] != 'Name') { 
           if (allValues[2][k][0].toLowerCase() == cas[j].toLowerCase()) { 
             //Logger.log("Found "+cas[j]+" in 3 "+allValues[2][k][cols[1]]+" "+allValues[2][k][cols[1]+1]);
-            range[row + dataRows('new pvr')][0] = Math.round(allValues[2][k][cols[1]+1]);
+            range[row + dataRows('used pvr')][0] = Math.round(allValues[2][k][cols[1]+1]);
             found = true;
           }
         }
       }
-      if (!found) { range[row + dataRows('new pvr')][0] = 0; }
+      if (!found) { range[row + dataRows('used pvr')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[3].length && !found; k++) { 
         if ((allValues[3][k] == undefined || allValues[3][k][0] == '' || allValues[3][k][0] == undefined)
