@@ -99,7 +99,7 @@ function axcessa() {
     for (j = 0; j < rows.length; j++) {
       accValue = 0;
       found = false;
-      row = parseInt(rows[j]);
+      row = parseInt(rows[j]) - 1;
       for (var k = 0; k < allValues[0].length && !found; k++) {
         if ((allValues[0][k] == undefined || allValues[0][k][0] == '' || allValues[0][k][0] == undefined)
             && (allValues[0][k+1] == undefined || allValues[0][k+1][0] == '' || allValues[0][k+1][0] == undefined))
@@ -115,7 +115,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[0].getSheetName());*/ range[row][0]=0; range[row+1][0]=0; }
+      if (!found) { range[row + dataRows('new')][0] = 0; range[row + dataRows('used')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[1].length && !found; k++) { 
         if ((allValues[1][k] == undefined || allValues[1][k][0] == '' || allValues[1][k][0] == undefined)
@@ -131,7 +131,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[1].getSheetName());*/ range[row+3][0]=0; }
+      if (!found) { range[row + dataRows('new product')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[2].length && !found; k++) { 
         if ((allValues[2][k] == undefined || allValues[2][k][0] == '' || allValues[2][k][0] == undefined)
@@ -147,7 +147,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[2].getSheetName());*/ range[row+5][0]=0; }
+      if (!found) { range[row + dataRows('new pvr')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[3].length && !found; k++) { 
         if ((allValues[3][k] == undefined || allValues[3][k][0] == '' || allValues[3][k][0] == undefined)
@@ -175,7 +175,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[3].getSheetName());*/ range[row + dataRows('new product')][0]=0; }
+      if (!found) { range[row + dataRows('new product')][0] = 0; }
       found = false;
       for (k = 0; k < allValues[4].length && !found; k++) { 
         if ((allValues[4][k] == undefined || allValues[4][k][0] == '' || allValues[4][k][0] == undefined)
@@ -204,7 +204,7 @@ function axcessa() {
           }
         }
       }
-      if (!found) { /*Logger.log(cas[j]+" wasn't found in "+allTargets[4].getSheetName());*/ range[row + dataRows('used product')][0] = 0; }
+      if (!found) { range[row + dataRows('used product')][0] = 0; }
       //Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
       range[row + dataRows('accessories')][0] = accValue;
     }
