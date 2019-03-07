@@ -2,16 +2,20 @@ function rank(){
   //Version 3.1
   //Created By Kennen Lawrence
   //initialization
+  var options = ['points', 'appts/shown', 'acc avg.', 'contacted int', 'videos/lead'];
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet, row, type, name, rows, sheet_name, teams, check, pointsArray, check1;
+  var sheet, row, type, name, rows, sheet_name, teams, pointsArray;
   var rank = []; var r = 0; var temp = []; var current = '';
   
   ss.getSheetByName('CA Ranking').getRange(2, 2, ss.getSheetByName('CA Ranking').getLastRow()-1, 7).setValue('');
   ss.getSheetByName('CA Ranking').getRange('J7:K7').setValues([['Updating...', '']]);
   ss.toast('The list is refreshing, please wait! This may take up to 30 seconds!', 'Updating!', 25);
   
-  check = ss.getSheetByName('CA Ranking').getRange('I5:I7').getValues();
+  var check = ss.getSheetByName('CA Ranking').getRange('I5:I7').getValues();
   if (check[0][0] != 'All') { teams = [check[0][0]]; } else { teams = viewTeams(); }
+  
+  var selected = options.indexOf(check[2][0].toLowerCase());
+  if (selected === -1) { selected = 0; options = 'invalid'};
   
   for (var l = 0; l < teams.length; l++) {
     sheet_name = teams[l];
@@ -21,50 +25,28 @@ function rank(){
     for (var k = 0; k < name.length; k++) {
       current = name[k];
       pointsArray = aStats(sheet_name, current, 'ranking');
-      if (r == 0) { rank[0] = pointsArray; }
+      if (r === 0) { rank[0] = pointsArray; }
       else {
         for (var m = 0; m < rank.length; m++) {
-          if (check[2][0] == 'Points') {
+            
+          if (pointsArray[2 + selected] > rank[m][2 + selected]) {
+            temp = rank[m];
+            rank[m] = pointsArray;
+            pointsArray = temp;
+          }
+          //Handle a tie
+          else if (selected !== 0 && pointsArray[2 + selected] === rank[m][2 + selected]) {
             if (pointsArray[2] > rank[m][2]) {
               temp = rank[m];
               rank[m] = pointsArray;
               pointsArray = temp;
             }
-          } else if (check[2][0] == 'Videos') {
-            if (pointsArray[3] > rank[m][4]) {
-              temp = rank[m];
-              rank[m] = pointsArray;
-              pointsArray = temp;
-            }
-          } else if (check[2][0] == 'Accolades') {
-            if (pointsArray[4] > rank[m][5]) {
-              temp = rank[m];
-              rank[m] = pointsArray;
-              pointsArray = temp;
-            }
-          } else if (check[2][0] == 'Testimonials') {
-            if (pointsArray[5] > rank[m][6]) {
-              temp = rank[m];
-              rank[m] = pointsArray;
-              pointsArray = temp;
-            }
-          } else if (check[2][0] == 'Max Digital') {
-            if (pointsArray[6] > rank[m][7]) {
-              temp = rank[m];
-              rank[m] = pointsArray;
-              pointsArray = temp;
-            }
-          } else if (check[2][0] == 'Advantastars') {
-            if (pointsArray[7] > rank[m][8]) {
-              temp = rank[m];
-              rank[m] = pointsArray;
-              pointsArray = temp;
-            }
           }
+          
         }
         rank[r] = pointsArray;
       }
-      r += 1;
+      r++;
     }
   }
   row = 2;

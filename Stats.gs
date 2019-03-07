@@ -44,53 +44,53 @@ function aStats (sheet_name, ca, type, x) {
     
     for (var j = 0; j < range[0].length; j++) {
       
-      var data = range[row + dataRows('emails')][j];
-      if (typeof data === 'number') {
+      var data = parseInt(range[row + dataRows('emails')][j]);
+      if (!isNaN(data)) {
         indv_other[emails] += parseInt(data);
       }
       
-      data = range[row + dataRows('texts')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('texts')][j]);
+      if (!isNaN(data)) {
         indv_other[texts] += parseInt(data);
       }
       
-      data = range[row + dataRows('phone')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('phone')][j]);
+      if (!isNaN(data)) {
         indv_other[phone] += parseInt(data);
       }
       
-      data = range[row + dataRows('fresh')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('fresh')][j]);
+      if (!isNaN(data)) {
         indv_other[fresh] += parseInt(data);
       }
       
-      data = range[row + dataRows('internet')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('internet')][j]);
+      if (!isNaN(data)) {
         indv_other[internet] += parseInt(data);
       }
       
       
       //Point accumulation section
-      data = range[row + dataRows('appts shown')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('appts shown')][j]);
+      if (!isNaN(data)) {
         // Rule for point: If >= 50% = 5 points; else if < 50% = 1 point
         indv_points[appt_to_show] += data >= 0.5 ? 5 : 1;
       }
       
-      data = range[row + dataRows('avg accessories')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('avg accessories')][j]);
+      if (!isNaN(data)) {
         //Accessory Average (= 1 point per thousand average)
         indv_points[acc_avg] += parseInt(data / 1000, 10);
       }
       
-      data = range[row + dataRows('contacted')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('contacted')][j]);
+      if (!isNaN(data)) {
         //contacted internet leads (= 1 point per lead contacted),
         indv_points[contacted_leads] += parseInt(data);
       }
       
-      data = range[row + dataRows('videos/lead')][j];
-      if (typeof data === 'number') {
+      data = parseInt(range[row + dataRows('videos/lead')][j]);
+      if (!isNaN(data)) {
         //If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points
         if (data >= 0.7) { data = 5; }
         else if (data < 0.7 && data >= 0.5) { data = 2; }
