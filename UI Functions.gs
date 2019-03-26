@@ -7,11 +7,12 @@ function onOpen() {
   ss.getSheetByName('Team Merrie').getRange('C4').getValue();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Stats'));
   var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Utilities').addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addItem('Reset Statistics','reset')
-  .addItem('Refresh CA Ranking','rank').addItem('Import Scoreboard','scoreboard').addItem('Axcessa Import','axcessa').addToUi();
+  ui.createMenu('Utilities').addSubMenu(ui.createMenu('Import').addItem('Scoreboard','scoreboard').addItem('Axcessa','axcessa').addItem('Daily Recap','dailyRecapImport'))
+  .addItem('Reset Statistics','reset').addItem('Refresh CA Ranking','rank').addSeparator().addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
   ss.getSheetByName('1v1').hideSheet();
+  ss.getSheetByName('Daily Recap').hideSheet();
   ss.getSheetByName('SBMaster').hideSheet();
   SpreadsheetApp.flush();
   ss.toast(message, title);

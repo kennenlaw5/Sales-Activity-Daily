@@ -206,7 +206,7 @@ function axcessa() {
       }
       if (!found) { range[row + dataRows('used product')][0] = 0; }
       //Logger.log("Adding accValue '"+accValue+"' to range at row "+(row+6));
-      range[row + dataRows('accessories')][0] = accValue;
+      //range[row + dataRows('accessories')][0] = accValue; /* Removed for recap import */
     }
     for (j = 0; j < formulas.length; j++) { 
       if (formulas[j][0] != '') { range[j][0] = formulas[j][0]; }

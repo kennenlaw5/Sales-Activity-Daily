@@ -55,6 +55,25 @@ function axcessaNames (sheet_name) {
   }
 }
 
+function dailyRecapNames (sheet_name) {
+  //Created By Kennen Lawrence
+  if (sheet_name == 'Team Merrie') {
+    return ['Chris Castro', 'Ian Hudgens', 'Demitri Gavito', 'Jim Merrell', 'Daniel Fink'];
+  }
+  else if (sheet_name == 'Team Ben') {
+    return ['Patrick Quinlan', 'Marlowe Jones', 'Sam Nejad', 'James Pryor', 'Shahin Nia', 'Jeanne Tal', 'Adam Ellison'];
+  }
+  else if (sheet_name == 'Team Robb') {
+    return ['Jeff Hanson', 'Conner Graves', 'Mo Kayeni', 'Troy Roth', 'Stephanie Reese', 'Andrien Franklin'];
+  }
+  else if (sheet_name == 'Team Josh') {
+    return ['Alex Duquette', 'Michael Barrett', 'Ace Taylor-Brown', 'Andrew Sapoznik', 'Adam Maxwell'];
+  }
+  else if (sheet_name == 'Team Liz') {
+    return ['Chuck Northrup', 'Chris Leirer', 'Damir Memisivic', 'Michael Meis', 'Patrick Stenson', 'Toby Hesketh-Tutton', 'Tina Watson'];
+  }
+}
+
 function viewTeams (type) {
   //Created By Kennen Lawrence
   var names = ['Team Merrie', 'Team Ben', 'Team Robb', 'Team Josh', 'Team Liz'];
