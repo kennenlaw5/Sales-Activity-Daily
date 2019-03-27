@@ -7,7 +7,7 @@ function aStats (sheet_name, ca, type, x) {
   
   /* Point types: [
   0 = Appointment to Show Ratio (If >= 50% = 5 points; else if < 50% = 1 point),
-  1 = Accessory Average (= 1 point per thousand average),
+  1 = Accessory Average (= 10 points per hundred average),
   2 = contacted internet leads (= 1 point per lead contacted),
   3 = Vehicle Video to lead ratio (If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points),
   ]*/
@@ -44,52 +44,52 @@ function aStats (sheet_name, ca, type, x) {
     
     for (var j = 0; j < range[0].length; j++) {
       
-      var data = parseInt(range[row + dataRows('emails')][j]);
+      var data = parseInt(range[row + dataRows('emails')][j], 10);
       if (!isNaN(data)) {
         indv_other[emails] += parseInt(data);
       }
       
-      data = parseInt(range[row + dataRows('texts')][j]);
+      data = parseInt(range[row + dataRows('texts')][j], 10);
       if (!isNaN(data)) {
         indv_other[texts] += parseInt(data);
       }
       
-      data = parseInt(range[row + dataRows('phone')][j]);
+      data = parseInt(range[row + dataRows('phone')][j], 10);
       if (!isNaN(data)) {
         indv_other[phone] += parseInt(data);
       }
       
-      data = parseInt(range[row + dataRows('fresh')][j]);
+      data = parseInt(range[row + dataRows('fresh')][j], 10);
       if (!isNaN(data)) {
         indv_other[fresh] += parseInt(data);
       }
       
-      data = parseInt(range[row + dataRows('internet')][j]);
+      data = parseInt(range[row + dataRows('internet')][j], 10);
       if (!isNaN(data)) {
         indv_other[internet] += parseInt(data);
       }
       
       
       //Point accumulation section
-      data = parseInt(range[row + dataRows('appts shown')][j]);
+      data = parseInt(range[row + dataRows('appts shown')][j], 10);
       if (!isNaN(data)) {
         // Rule for point: If >= 50% = 5 points; else if < 50% = 1 point
         indv_points[appt_to_show] += data >= 0.5 ? 5 : 1;
       }
       
-      data = parseInt(range[row + dataRows('avg accessories')][j]);
+      data = parseInt(range[row + dataRows('avg accessories')][j], 10);
       if (!isNaN(data)) {
-        //Accessory Average (= 1 point per thousand average)
-        indv_points[acc_avg] += parseInt(data / 1000, 10);
+        //Accessory Average (= 10 point per hundred average)
+        indv_points[acc_avg] += parseInt(data / 100, 10) * 10;
       }
       
-      data = parseInt(range[row + dataRows('contacted')][j]);
+      data = parseInt(range[row + dataRows('contacted')][j], 10);
       if (!isNaN(data)) {
         //contacted internet leads (= 1 point per lead contacted),
         indv_points[contacted_leads] += parseInt(data);
       }
       
-      data = parseInt(range[row + dataRows('videos/lead')][j]);
+      data = parseInt(range[row + dataRows('videos/lead')][j], 10);
       if (!isNaN(data)) {
         //If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points
         if (data >= 0.7) { data = 5; }
@@ -99,6 +99,9 @@ function aStats (sheet_name, ca, type, x) {
         indv_points[video_to_lead] += data;
       }
     }
+    
+    //@TODO Accessory Average Points (Needs to be calculated properly still)!
+    
     
     if (ca == 'maxMin') {
       if (type == 'All') { maxMin[l] = [name[l], indv_points[appt_to_show] + indv_points[acc_avg] + indv_points[contacted_leads] + indv_points[video_to_lead]]; }

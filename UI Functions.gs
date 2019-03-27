@@ -7,8 +7,9 @@ function onOpen() {
   ss.getSheetByName('Team Merrie').getRange('C4').getValue();
   SpreadsheetApp.setActiveSheet(ss.getSheetByName('Team Stats'));
   var ui = SpreadsheetApp.getUi();
-  ui.createMenu('Utilities').addSubMenu(ui.createMenu('Import').addItem('Scoreboard','scoreboard').addItem('Axcessa','axcessa').addItem('Daily Recap','dailyRecapImport'))
-  .addItem('Reset Statistics','reset').addItem('Refresh CA Ranking','rank').addSeparator().addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addToUi();
+  ui.createMenu('Utilities').addItem('Reset Statistics','reset').addItem('Refresh CA Ranking','rank')
+  .addSubMenu(ui.createMenu('Import').addItem('Scoreboard','scoreboard').addItem('Axcessa','axcessa').addItem('Daily Recap','dailyRecapImport'))
+  .addSeparator().addSubMenu(ui.createMenu('Help').addItem('By Phone','menuItem1').addItem('By Email','menuItem2')).addToUi();
   var message = 'The spreadsheet has loaded successfully! Have a great day!';
   var title = 'Complete!';
   ss.getSheetByName('1v1').hideSheet();
@@ -27,7 +28,7 @@ function menuItem2() {
   var ui = SpreadsheetApp.getUi();
   var input = ui.prompt('Email Sheet Creator','Describe the issue you\'re having in the box below, then press "Ok" to submit your issue via email:',ui.ButtonSet.OK_CANCEL);
   if (input.getSelectedButton() == ui.Button.OK) {
-    MailApp.sendEmail('kennen.lawrence@schomp.com','HELP Sales Daily_November',input.getResponseText(),{name:getName()});
+    MailApp.sendEmail('kennen.lawrence@a2zsync.com','HELP Sales Daily_March',input.getResponseText(),{name:getName()});
   } else if (input.getSelectedButton() == ui.Button.CANCEL) {
     Logger.log('User cancelled');
   }
