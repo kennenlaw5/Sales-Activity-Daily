@@ -2,7 +2,7 @@ function aStats (sheet_name, ca, type, x) {
   //Created By Kennen Lawrence
   //Version 4.0
   
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss    = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = ss.getSheetByName(sheet_name);
   
   /* Point types: [
@@ -11,8 +11,9 @@ function aStats (sheet_name, ca, type, x) {
   2 = contacted internet leads (= 1 point per lead contacted),
   3 = Vehicle Video to lead ratio (If >= 10 && < 50% = 1 point;  else if >= 50 < 70% = 2 points; else if >= 70% = 5 points),
   ]*/
+  var accAvgCount  = 0;
   var appt_to_show = 0, acc_avg = 1, contacted_leads = 2, video_to_lead = 3;
-  var indv_points = [0, 0, 0, 0];
+  var indv_points  = [0, 0, 0, 0];
   
   /* Other types: [
   0 = Emails,
@@ -21,14 +22,14 @@ function aStats (sheet_name, ca, type, x) {
   3 = Phone Leads,
   4 = Internet Leads,
   ]*/
-  var emails = 0, texts = 1, fresh = 2, phone = 3, internet = 4;
+  var emails     = 0, texts = 1, fresh = 2, phone = 3, internet = 4;
   var indv_other = [0, 0, 0, 0, 0];
   
-  var rows = teamRows(sheet_name);
-  var name = teamNames(sheet_name);
-  var range = sheet.getRange(3, 3, parseInt(sheet.getLastRow()) - 2, parseInt(sheet.getLastColumn()) - 2).getValues();
-  var row;
+  var rows   = teamRows(sheet_name);
+  var name   = teamNames(sheet_name);
+  var range  = sheet.getRange(3, 3, parseInt(sheet.getLastRow()) - 2, parseInt(sheet.getLastColumn()) - 2).getValues();
   var maxMin = [];
+  var row;
   
   for (var l = 0; l < rows.length; l++) {
     
@@ -79,8 +80,10 @@ function aStats (sheet_name, ca, type, x) {
       
       data = parseInt(range[row + dataRows('avg accessories')][j], 10);
       if (!isNaN(data)) {
-        //Accessory Average (= 10 point per hundred average)
-        indv_points[acc_avg] += parseInt(data / 100, 10) * 10;
+        //Accessory Average (Rules Below)
+        //Needs to use unparsed value to properly average out
+        indv_points[acc_avg] += range[row + dataRows('avg accessories')][j];
+        accAvgCount ++;
       }
       
       data = parseInt(range[row + dataRows('contacted')][j], 10);
@@ -100,8 +103,22 @@ function aStats (sheet_name, ca, type, x) {
       }
     }
     
-    //@TODO Accessory Average Points (Needs to be calculated properly still)!
+    //Calculate Accessory Average Points
+    indv_points[acc_avg] /= accAvgCount;
     
+    if (indv_points[acc_avg] >= 800) {
+      indv_points[acc_avg] = 50;
+    } else if (indv_points[acc_avg] >= 600) {
+      indv_points[acc_avg] = 40;
+    } else if (indv_points[acc_avg] >= 400) {
+      indv_points[acc_avg] = 30;
+    } else if (indv_points[acc_avg] >= 250) {
+      indv_points[acc_avg] = 20;
+    } else if (indv_points[acc_avg] >= 100) {
+      indv_points[acc_avg] = 10;
+    } else {
+      indv_points[acc_avg] = 0;
+    }
     
     if (ca == 'maxMin') {
       if (type == 'All') { maxMin[l] = [name[l], indv_points[appt_to_show] + indv_points[acc_avg] + indv_points[contacted_leads] + indv_points[video_to_lead]]; }
