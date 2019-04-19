@@ -57,8 +57,8 @@ function sbRename() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sheets = ss.getSheets();
   var range, sheet;
-  var oldName = 'Karen';
-  var newName = 'Kat';
+  var oldName = 'Jeff H';
+  var newName = 'Jeff Hanson';
   var names = [];
   var start = false;
   
@@ -71,7 +71,7 @@ function sbRename() {
       sheet = ss.getSheetByName(names[i]);
       ss.setActiveSheet(sheet);
       range = sheet.getRange(4, 1).getFormula();
-      if (range == undefined || range == ''|| range == null) { hardPrint(names[i]); }
+      if (range != undefined && range != ''&& range != null) { hardPrint(names[i]); }
       range = ss.getSheetByName(names[i]).getRange(4, 1, sheet.getLastRow()).getValues();
       
       for(var j = 0; j < range.length; j++) {
@@ -79,6 +79,7 @@ function sbRename() {
       }
       
       sheet.getRange(4, 1, sheet.getLastRow()).setValues(range);
+      SpreadsheetApp.flush();
       sheet.hideSheet();
       SpreadsheetApp.flush();
     }
